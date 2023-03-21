@@ -27,7 +27,6 @@ const Navbar = () => {
 		<>
 		<Nav>
 			<Bars />
-
 			<NavMenu>
 			<NavLink to='/about' activeStyle>
 				About
@@ -35,11 +34,11 @@ const Navbar = () => {
 			<NavLink to='/events' activeStyle>
 				Events
 			</NavLink>
-			<NavLink to='/annual' activeStyle>
-				Annual Report
+			<NavLink to='/projects' activeStyle>
+				My Projects
 			</NavLink>
-			<NavLink to='/team' activeStyle>
-				Teams
+			<NavLink to='/work' activeStyle>
+				Services
 			</NavLink>
 			<NavLink to='/blogs' activeStyle>
 				Blogs
