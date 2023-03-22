@@ -42,6 +42,7 @@ const Navbar = () => {
 					<>
 					<Bars />
 					<NavMenu>
+						<NavLink to='/' activeStyle>Home</NavLink>
 						<NavLink to='/about' activeStyle>About</NavLink>
 						<NavLink to='/events' activeStyle>Events</NavLink>
 						<NavLink to='/projects' activeStyle>My Projects</NavLink>

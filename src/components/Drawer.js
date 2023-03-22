@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
+import "../css/styles.css"
 
 function DrawerComponent() {
 const [openDrawer, setOpenDrawer] = useState(false);
@@ -16,41 +17,47 @@ return (
     <Drawer
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
+        PaperProps={{
+            sx: {
+              backgroundColor: "#3f99bf",
+              width: "250px"
+            },
+          }}
     >
         <List>
         <ListItem onClick={() => setOpenDrawer(false)}>
             <ListItemText>
-            <Link to="/">Home</Link>
+            <Link className="navBarItem" to="/">Home</Link>
             </ListItemText>
         </ListItem>
         <ListItem onClick={() => setOpenDrawer(false)}>
             <ListItemText>
-            <Link to="/about">About</Link>
+            <Link className="navBarItem" to="/about">About</Link>
             </ListItemText>
         </ListItem>
         <ListItem onClick={() => setOpenDrawer(false)}>
             <ListItemText>
-            <Link to="/events">Events</Link>
+            <Link className="navBarItem" to="/events">Events</Link>
             </ListItemText>
         </ListItem>
         <ListItem onClick={() => setOpenDrawer(false)}>
             <ListItemText>
-            <Link to="/projects">Projects</Link>
+            <Link className="navBarItem" to="/projects">Projects</Link>
             </ListItemText>
         </ListItem>
         <ListItem onClick={() => setOpenDrawer(false)}>
             <ListItemText>
-            <Link to="/work">Services</Link>
+            <Link className="navBarItem" to="/work">Services</Link>
             </ListItemText>
         </ListItem>
         <ListItem onClick={() => setOpenDrawer(false)}>
             <ListItemText>
-            <Link to="/blogs">Blogs</Link>
+            <Link className="navBarItem" to="/blogs">Blogs</Link>
             </ListItemText>
         </ListItem>
         <ListItem onClick={() => setOpenDrawer(false)}>
             <ListItemText>
-            <Link to="/signup">Sign Up / Log In</Link>
+            <Link className="navBarItem" to="/signup">Sign Up / Log In</Link>
             </ListItemText>
         </ListItem>
         </List>
