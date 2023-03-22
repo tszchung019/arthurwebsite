@@ -6,6 +6,7 @@ import {
   ListItem,
   ListItemText
 } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
 
 function DrawerComponent() {
@@ -55,6 +56,7 @@ return (
         </List>
     </Drawer>
     <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
+        <MenuIcon />
     </IconButton>
     </>
 );
