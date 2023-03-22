@@ -6,3 +6,9 @@
     right:0;
     margin:auto
 }
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
