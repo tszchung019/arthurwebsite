@@ -10,6 +10,11 @@ NavBtnLink,
 import { useCallback } from "react";
 import Particles from "react-particles";
 import { loadFull } from "tsparticles";
+import DrawerComponent from '../Drawer';
+import {
+	useTheme,
+	useMediaQuery
+} from "@mui/material";
 
 const Navbar = () => {
 	const particlesInit = useCallback(async engine => {
@@ -23,22 +28,34 @@ const Navbar = () => {
     const particlesLoaded = useCallback(async container => {
         await console.log(container);
     }, []);
+
+	const theme = useTheme();
+	const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
 	return (
 		<>
 		<Nav className="navbar">
-			<Bars />
-			<NavMenu>
-			<NavLink to='/about' activeStyle>About</NavLink>
-			<NavLink to='/events' activeStyle>Events</NavLink>
-			<NavLink to='/projects' activeStyle>My Projects</NavLink>
-			<NavLink to='/work' activeStyle>Services</NavLink>
-			<NavLink to='/blogs' activeStyle>Blogs</NavLink>
-			{/* Second Nav */}
-			{/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
-			</NavMenu>
-			<NavBtn>
-			<NavBtnLink to='/signup'>Sign Up / Log In</NavBtnLink>
-			</NavBtn>
+			{
+				isMobile ? (
+					<DrawerComponent />
+				) : (
+					<>
+					<Bars />
+					<NavMenu>
+						<NavLink to='/about' activeStyle>About</NavLink>
+						<NavLink to='/events' activeStyle>Events</NavLink>
+						<NavLink to='/projects' activeStyle>My Projects</NavLink>
+						<NavLink to='/work' activeStyle>Services</NavLink>
+						<NavLink to='/blogs' activeStyle>Blogs</NavLink>
+						{/* Second Nav */}
+						{/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
+					</NavMenu>
+					<NavBtn>
+						<NavBtnLink to='/signup'>Sign Up / Log In</NavBtnLink>
+					</NavBtn>
+					</>
+				)
+			}
 		</Nav>
 		<Particles
             id="tsparticles"

@@ -4,6 +4,9 @@
   "private": true,
   "dependencies": {
     "@aws-amplify/ui-react": "^4.4.0",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/material": "^5.11.14",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -16,6 +19,7 @@
     "react-scripts": "^5.0.1",
     "styled-components": "^5.3.9",
     "tsparticles": "^2.9.3",
+    "tss-react": "^4.8.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
