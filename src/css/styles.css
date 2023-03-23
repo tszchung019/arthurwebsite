@@ -15,4 +15,23 @@
     text-decoration: none;
     color: #fff;
     font-weight: bolder;
+    padding: 0 10px;
+}
+
+.navBarIcon {
+    color: #fff;
+}
+
+.navBarButton {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bolder;
+}
+
+#signupButton {
+    background: #15AD98;
+}
+
+#menuIcon {
+    padding: 10px 20px;
 }

@@ -15,7 +15,7 @@ export default function App() {
             <div class="content">
                 <h1>Hello {user.username}</h1>
                 <section>
-                    <p>This is your portal for managing your projects with me. You can start a new project, asking for a quote, and manage the work schedule with existing projects</p>
+                    <p>This is your portal for managing your projects with me. You can start a new project, ask for a quote, and manage the work schedule with existing projects</p>
                 </section>
                 <button onClick={signOut}>Sign out</button>
             </div>
