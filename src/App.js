@@ -12,10 +12,9 @@ import Home from './pages';
 import About from './pages/about';
 import Events from './pages/events';
 import AnnualReport from './pages/projects';
-import Teams from './pages/work';
+import Work from './pages/work';
 import Blogs from './pages/blogs';
 import SignUp from './pages/signup';
-import Work from './pages/work';
 
 import { useCallback } from "react";
 import Particles from "react-particles";

@@ -7,8 +7,24 @@
     margin:auto
 }
 
+h1 {
+    color: #000639;
+}
+
+h2 {
+    color: #000639;
+}
+
+p {
+    color: #000639;
+}
+
 .navbar {
     display: flex;
+}
+
+#userPortal {
+    background-color: honeydew;
 }
 
 .navBarItem {
