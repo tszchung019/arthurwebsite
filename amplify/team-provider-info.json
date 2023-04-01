@@ -15,6 +15,9 @@
       "auth": {
         "arthurwebsited39bd1b9": {},
         "userPoolGroups": {}
+      },
+      "api": {
+        "arthurwebsite": {}
       }
     }
   }
