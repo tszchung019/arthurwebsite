@@ -58,10 +58,11 @@ const Blogs = () => {
 
 	async function deleteBlog({ id }) {
 		const newBlogs = blogs.filter((blog) => blog.id !== id);
+		console.log(typeof(id));
 		setBlogs(newBlogs);
 		await API.graphql({
 			query: deleteBlogMutation,
-			variables: { input: ( id ) },
+			variables: { input: { id } },
 		});
 	}
 
