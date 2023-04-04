@@ -35,6 +35,8 @@ import {
   updateComment as updateCommentMutation,
   deleteComment as deleteCommentMutation,
 } from "../graphql/mutations"
+import { NavLink } from "react-router-dom";
+import BlogPost from "../components/Blog";
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState([]);
@@ -76,15 +78,6 @@ const Blogs = () => {
     });
   }
 
-  async function getPostsfromBlog({ id }) {
-    const apiData = await API.graphql({
-      query: getBlogQuery,
-      variables: { id: id },
-    });
-    const postsFromAPI = apiData.data.getBlog.posts.items;
-    setPosts(postsFromAPI);
-  }
-
   return (
     <body>
     <div>
@@ -121,29 +114,17 @@ const Blogs = () => {
                 justifyContent="center"
                 alignItems="center"
               >
-                <Link
-                  onClick={() => {
-                    getPostsfromBlog(blog);
-                  } }
-                  as="strong"
-                  fontWeight={700}
+                <NavLink
+                  to={'./' + blog.id}
+                  component={BlogPost}
                 >
                   {blog.name}
-                </Link>
+                </NavLink>
 
                 <Button variation="link" onClick={() => deleteBlog(blog)} disabled>
                   Delete blog
                 </Button>
               </Flex>
-            ))}
-          </View>
-          <Heading level={2}>Posts</Heading>
-          <View>
-            {posts.map((post) => (
-              <View key={post.id}>
-                <Heading level={3}>{post.title}</Heading>
-                <Text>{post.content}</Text>
-              </View>
             ))}
           </View>
         </View>
