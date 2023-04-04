@@ -44,6 +44,10 @@ p {
     font-weight: bolder;
 }
 
+.homeIcon {
+    padding: 10px 10px;
+}
+
 #signupButton {
     background: #15AD98;
 }

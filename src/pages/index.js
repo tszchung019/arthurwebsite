@@ -1,9 +1,24 @@
 import React from 'react';
 import '../css/styles.css';
+import DrawerComponent from '../components/Drawer';
+import Navbar from '../components/Navbar';
+import {
+	useTheme,
+	useMediaQuery
+} from "@mui/material";
 
 const Home = () => {
+	const theme = useTheme();
+	const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 	return (
 		<body>
+			<div>
+				{isMobile ? (
+					<DrawerComponent />
+				) : (
+					<Navbar />
+				)}
+			</div>
 			<div class="content">
 				<section>
 					<h2>Welcome to my website</h2>

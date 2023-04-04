@@ -1,11 +1,5 @@
 import React from 'react';
 import './App.css';
-import Navbar from './components/Navbar';
-import DrawerComponent from './components/Drawer';
-import {
-	useTheme,
-	useMediaQuery
-} from "@mui/material";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages';
 import About from './pages/about';
@@ -31,9 +25,6 @@ function App() {
   const particlesLoaded = useCallback(async container => {
     await console.log(container);
   }, []);
-
-  const theme = useTheme();
-	const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <Router>
@@ -445,15 +436,6 @@ function App() {
 				 }
 			}
       />
-      <div>
-        {
-          isMobile ? (
-            <DrawerComponent />
-          ) : (
-            <Navbar />
-          )
-        }
-      </div>
       <Routes>
         <Route path='/' exact element={<Home/>} />
         <Route path='/about' element={<About/>} />

@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "../css/styles.css";
+import DrawerComponent from '../components/Drawer';
+import Navbar from '../components/Navbar';
+import {
+	useTheme,
+	useMediaQuery
+} from "@mui/material";
 import { API } from "aws-amplify";
 import {
   Button,
@@ -33,6 +39,9 @@ import {
 const Blogs = () => {
   const [blogs, setBlogs] = useState([]);
   const [posts, setPosts] = useState([]);
+
+  const theme = useTheme();
+	const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   useEffect(() => {
     fetchBlogs();
@@ -77,61 +86,69 @@ const Blogs = () => {
   }
 
   return (
-    <div class="content">
-      <h1>Welcome to Arthur's Blogs</h1>
-      <View className="Blog">
-        <Heading level={1}>My Blogs</Heading>
-        <View as="form" margin="3rem 0" onSubmit={createBlog}>
-          <Flex direction="row" justifyContent="center">
-            <TextField
-              name="name"
-              placeholder="Blog Name"
-              label="Blog Name"
-              labelHidden
-              variation="quiet"
-              required
-            />
-            <Button type="submit" variation="primary">
-              Create Blog
-            </Button>
-          </Flex>
-        </View>
-        <Heading level={2}>Current Blogs</Heading>
-        <View margin="3rem 0">
-          {blogs.map((blog) => (
-            <Flex
-              key={blog.id || blog.name}
-              direction="row"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Link
-                onClick={() => {
-                  getPostsfromBlog(blog);
-                }}
-                as="strong"
-                fontWeight={700}
-              >
-                {blog.name}
-              </Link>
-
-              <Button variation="link" onClick={() => deleteBlog(blog)} disabled>
-                Delete blog
+    <body>
+    <div>
+      {isMobile ? (
+        <DrawerComponent />
+      ) : (
+        <Navbar />
+      )}
+    </div>
+      <div class="content">
+        <h1>Welcome to Arthur's Blogs</h1>
+        <View className="Blog">
+          <Heading level={1}>My Blogs</Heading>
+          <View as="form" margin="3rem 0" onSubmit={createBlog}>
+            <Flex direction="row" justifyContent="center">
+              <TextField
+                name="name"
+                placeholder="Blog Name"
+                label="Blog Name"
+                labelHidden
+                variation="quiet"
+                required />
+              <Button type="submit" variation="primary">
+                Create Blog
               </Button>
             </Flex>
-          ))}
+          </View>
+          <Heading level={2}>Current Blogs</Heading>
+          <View margin="3rem 0">
+            {blogs.map((blog) => (
+              <Flex
+                key={blog.id || blog.name}
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Link
+                  onClick={() => {
+                    getPostsfromBlog(blog);
+                  } }
+                  as="strong"
+                  fontWeight={700}
+                >
+                  {blog.name}
+                </Link>
+
+                <Button variation="link" onClick={() => deleteBlog(blog)} disabled>
+                  Delete blog
+                </Button>
+              </Flex>
+            ))}
+          </View>
+          <Heading level={2}>Posts</Heading>
+          <View>
+            {posts.map((post) => (
+              <View key={post.id}>
+                <Heading level={3}>{post.title}</Heading>
+                <Text>{post.content}</Text>
+              </View>
+            ))}
+          </View>
         </View>
-        <Heading level={2}>Posts</Heading>
-        <View>
-          {posts.map((post) => (
-            <View key={post.id}>
-              <Heading level={3}>{post.title}</Heading>
-              <Text>{post.content}</Text>
-            </View>
-          ))}
-        </View>
-      </View>
-    </div>
+      </div>
+      </body>
   );
 };
 
