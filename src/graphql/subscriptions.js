@@ -10,6 +10,7 @@ export const onCreateBlog = /* GraphQL */ `
         items {
           id
           title
+          content
           createdAt
           updatedAt
           blogPostsId
@@ -30,6 +31,7 @@ export const onUpdateBlog = /* GraphQL */ `
         items {
           id
           title
+          content
           createdAt
           updatedAt
           blogPostsId
@@ -50,6 +52,7 @@ export const onDeleteBlog = /* GraphQL */ `
         items {
           id
           title
+          content
           createdAt
           updatedAt
           blogPostsId
@@ -66,6 +69,7 @@ export const onCreatePost = /* GraphQL */ `
     onCreatePost(filter: $filter) {
       id
       title
+      content
       blog {
         id
         name
@@ -96,6 +100,7 @@ export const onUpdatePost = /* GraphQL */ `
     onUpdatePost(filter: $filter) {
       id
       title
+      content
       blog {
         id
         name
@@ -126,6 +131,7 @@ export const onDeletePost = /* GraphQL */ `
     onDeletePost(filter: $filter) {
       id
       title
+      content
       blog {
         id
         name
@@ -158,6 +164,7 @@ export const onCreateComment = /* GraphQL */ `
       post {
         id
         title
+        content
         blog {
           id
           name
@@ -185,6 +192,7 @@ export const onUpdateComment = /* GraphQL */ `
       post {
         id
         title
+        content
         blog {
           id
           name
@@ -212,6 +220,7 @@ export const onDeleteComment = /* GraphQL */ `
       post {
         id
         title
+        content
         blog {
           id
           name
