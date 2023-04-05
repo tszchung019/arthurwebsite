@@ -61,7 +61,7 @@ const Post = () => {
                         <p>{post.content}</p>
                     </section>
                 </Paper>
-                <NavLink to={'/blog'}>Return to Blog</NavLink>
+                <NavLink to={'/blogs'}>Return to Blog</NavLink>
             </View>
         </body>
     );
