@@ -18,6 +18,7 @@ import {
 } from "@mui/material";
 import { NavLink, useParams } from "react-router-dom";
 import Paper from '@mui/material/Paper';
+import { Translate } from "@mui/icons-material";
 
 const Post = () => {
     const theme = useTheme();
@@ -50,6 +51,7 @@ const Post = () => {
 			</div>
             <View class="content">
                 <Paper sx={{
+                    padding: '10px 20px',
                     height: '80vh',
                 }}>
                     <section>
