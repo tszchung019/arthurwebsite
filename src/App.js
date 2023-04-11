@@ -14,6 +14,7 @@ import Particles from "react-particles";
 import { loadFull } from "tsparticles";
 import BlogPost from './components/Blog';
 import Post from './components/Post';
+import Admin from './components/Admin';
 
 function App() {
   const particlesInit = useCallback(async engine => {
@@ -448,6 +449,7 @@ function App() {
 		<Route path='/blogs/:id' element={<BlogPost/>} />
 		<Route path='/posts/:id' element={<Post/>} />
         <Route path="/signup" element={<SignUp/>} />
+		<Route path="/admin" element={<Admin />} />
       </Routes>
     </Router>
   );

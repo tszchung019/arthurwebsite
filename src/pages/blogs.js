@@ -40,7 +40,6 @@ import BlogPost from "../components/Blog";
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState([]);
-  const [posts, setPosts] = useState([]);
 
   const theme = useTheme();
 	const isMobile = useMediaQuery(theme.breakpoints.down("md"));
