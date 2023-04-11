@@ -104,10 +104,6 @@ const Blogs = () => {
                 >
                   {blog.name}
                 </NavLink>
-
-                <Button variation="link" onClick={() => deleteBlog(blog)} disabled>
-                  Delete blog
-                </Button>
               </Flex>
             ))}
           </View>
