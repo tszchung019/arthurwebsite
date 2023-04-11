@@ -89,21 +89,6 @@ const Blogs = () => {
       <div class="content">
         <h1>Welcome to Arthur's Blogs</h1>
         <View className="Blog">
-          <Heading level={1}>My Blogs</Heading>
-          <View as="form" margin="3rem 0" onSubmit={createBlog}>
-            <Flex direction="row" justifyContent="center">
-              <TextField
-                name="name"
-                placeholder="Blog Name"
-                label="Blog Name"
-                labelHidden
-                variation="quiet"
-                required />
-              <Button type="submit" variation="primary">
-                Create Blog
-              </Button>
-            </Flex>
-          </View>
           <Heading level={2}>Current Blogs</Heading>
           <View margin="3rem 0">
             {blogs.map((blog) => (
