@@ -30,6 +30,7 @@ import {
   deleteComment as deleteCommentMutation,
 } from "../../graphql/mutations"
 import { NavLink } from "react-router-dom";
+import AlertDialog from "../Props/AlertDialog";
 
 export default function ManageBlogs() {
     const [blogs, setBlogs] = useState([]);
@@ -99,9 +100,9 @@ export default function ManageBlogs() {
                     {blog.name}
                     </NavLink>
 
-                    <Button variation="link" onClick={() => deleteBlog(blog)}>
-                    Delete blog
-                    </Button>
+                    <AlertDialog 
+                        callback={() => deleteBlog(blog)}
+                    />
                 </Flex>
                 ))}
             </View>
