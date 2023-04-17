@@ -46,6 +46,7 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import CreateContent from "../Props/CreateContent";
 
 export default function ManageBlogs() {
     const [blogs, setBlogs] = useState([]);
@@ -97,7 +98,6 @@ export default function ManageBlogs() {
             });
             const postsFromAPI = apiData.data.getBlog.posts.items;
             setPosts(postsFromAPI);
-            console.log(postsFromAPI);
         }
 
         async function deletePost({ id }) {
@@ -106,6 +106,18 @@ export default function ManageBlogs() {
             await API.graphql({
             query: deletePostMutation,
             variables: { input: { id } },
+            });
+        }
+
+        async function createPost({id, title, content}) {
+            const data = {
+            blogPostsId: id,
+            title: title,
+            content: content,
+            };
+            await API.graphql({
+            query: createPostMutation,
+            variables: { input: data },
             });
         }
       
@@ -118,7 +130,6 @@ export default function ManageBlogs() {
                   size="small"
                   onClick={() => {
                     getPostsfromBlog(row);
-                    console.log(posts);
                     setOpen(!open);
                   }}
                 >
@@ -132,6 +143,17 @@ export default function ManageBlogs() {
                 {row.updatedAt}
               </TableCell>
               <TableCell component="th" scope="row" align="center">
+                <CreateContent 
+                  callback={(title, content) => {
+                    const blogId = row.id;
+                    const data = {
+                        id: blogId,
+                        title: title,
+                        content: content
+                    };
+                    createPost(data);
+                  }}
+                />
                 <AlertDialog 
                   callback={() => deleteBlog(row)}
                 />
@@ -193,7 +215,7 @@ export default function ManageBlogs() {
 
     return (
         <body>
-        <div class="content">
+        <div>
             <View className="Blog">
                 <Heading level={3}>Create New Blog</Heading>
                 <View as="form" margin="3rem 0" onSubmit={createBlog}>
