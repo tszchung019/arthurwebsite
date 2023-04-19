@@ -65,7 +65,9 @@ p {
 }
 
 .homeIcon {
-    padding: 10px 10px;
+    position: absolute;
+    top: 10px;
+    left: 20px;
 }
 
 #signupButton {

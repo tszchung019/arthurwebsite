@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Amplify, Auth } from 'aws-amplify';
+import React from 'react';
+import { Amplify } from 'aws-amplify';
 import { Authenticator, Heading } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import awsExports from '../aws-exports.js';
@@ -8,6 +8,7 @@ import { NavLink } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import '../css/styles.css';
 import Admin from '../components/Admin/index.js';
+import { Button } from '@mui/material';
 
 Amplify.configure(awsExports);
 
@@ -18,6 +19,7 @@ export default function SignUp() {
       <Authenticator>
         {({ signOut, user }) => (
           <main>
+            <Button variant="text" sx={{position: 'absolute', top: '5px', right: '10px'}} onClick={signOut}>Sign out</Button>
             <div class="content">
               {user.getSignInUserSession().getAccessToken().payload['cognito:groups']=='Admin'? (
                 <div>
@@ -35,7 +37,6 @@ export default function SignUp() {
               <section id='userPortal'>
                 <BasicTabs />
               </section>
-              <button onClick={signOut}>Sign out</button>
             </div>
           </main>
         )}

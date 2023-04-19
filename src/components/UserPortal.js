@@ -50,7 +50,7 @@ export default function BasicTabs() {
   return (
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+        <Tabs value={value} onChange={handleChange} variant="scrollable" scrollButtons allowScrollButtonsMobile aria-label="basic tabs example">
           <Tab label="New Project" {...a11yProps(0)} />
           <Tab label="Current Projects" {...a11yProps(1)} />
           <Tab label="Timelines" {...a11yProps(2)} />

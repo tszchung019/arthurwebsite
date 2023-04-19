@@ -22,7 +22,7 @@ const Home = () => {
 			<div class="content">
 				<section>
 					<h2>Welcome to my website</h2>
-					<p>Hello and welcome to my personal website!</p>
+					<p>Did you know that, according to a recent study by McKinsey Global Institute, nearly 50% of our daily work can be automated by currently available technologies in 2030? This means millions of people worldwide may need to consider upskilling or changing occupations to stay competitive in the market.</p>
 					<p>I'm excited to have you here and to share my passions, ideas, and experiences with you. This website is a space where I can express myself and connect with others who share similar interests.</p>
 					<p>On this site, you'll find a variety of topics that I'm passionate about, including web development, machine learning, and investment. My hope is that my content will inspire you, entertain you, and provide you with valuable insights and information.</p>
 					<p>Whether you're a long-time reader or a new visitor, I'm grateful for your support and interest in what I have to say. I encourage you to explore the site, leave comments, and connect with me on social media.</p>

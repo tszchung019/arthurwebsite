@@ -47,210 +47,233 @@ import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import CreateContent from "../Props/CreateContent";
+import { TablePagination } from "@mui/material";
 
 export default function ManageBlogs() {
-    const [blogs, setBlogs] = useState([]);
+  const [blogs, setBlogs] = useState([]);
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-    useEffect(() => {
-        fetchBlogs();
-    }, []);
+  useEffect(() => {
+      fetchBlogs();
+  }, []);
 
-    async function fetchBlogs() {
-        const apiData = await API.graphql({ query: listBlogsQuery });
-        const blogsFromAPI = apiData.data.listBlogs.items;
-        setBlogs(blogsFromAPI);
-    }
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
 
-    async function createBlog(event) {
-        event.preventDefault();
-        const form = new FormData(event.target);
-        const data = {
-        name: form.get("name"),
-        };
-        await API.graphql({
-        query: createBlogMutation,
-        variables: { input: data },
-        });
-        fetchBlogs();
-        event.target.reset();
-    }
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
-    async function deleteBlog({ id }) {
-        const newBlogs = blogs.filter((blog) => blog.id !== id);
-        setBlogs(newBlogs);
-        await API.graphql({
-        query: deleteBlogMutation,
-        variables: { input: { id } },
-        });
-    }
+  async function fetchBlogs() {
+      const apiData = await API.graphql({ query: listBlogsQuery });
+      const blogsFromAPI = apiData.data.listBlogs.items;
+      setBlogs(blogsFromAPI);
+  }
 
-    //Table Properties
+  async function createBlog(event) {
+      event.preventDefault();
+      const form = new FormData(event.target);
+      const data = {
+      name: form.get("name"),
+      };
+      await API.graphql({
+      query: createBlogMutation,
+      variables: { input: data },
+      });
+      fetchBlogs();
+      event.target.reset();
+  }
 
-    function Row(props) {
-        const { row } = props;
-        const [open, setOpen] = React.useState(false);
-        const [posts, setPosts] = useState([]);
+  async function deleteBlog({ id }) {
+      const newBlogs = blogs.filter((blog) => blog.id !== id);
+      setBlogs(newBlogs);
+      await API.graphql({
+      query: deleteBlogMutation,
+      variables: { input: { id } },
+      });
+  }
 
-        async function getPostsfromBlog({ id }) {
-            const apiData = await API.graphql({
-              query: getBlogQuery,
-              variables: { id: id },
-            });
-            const postsFromAPI = apiData.data.getBlog.posts.items;
-            setPosts(postsFromAPI);
-        }
+  //Table Properties
 
-        async function deletePost({ id }) {
-            const newPosts = posts.filter((post) => post.id !== id);
-            setPosts(newPosts);
-            await API.graphql({
-            query: deletePostMutation,
-            variables: { input: { id } },
-            });
-        }
+  function Row(props) {
+      const { row } = props;
+      const [open, setOpen] = React.useState(false);
+      const [posts, setPosts] = useState([]);
 
-        async function createPost({id, title, content}) {
-            const data = {
-            blogPostsId: id,
-            title: title,
-            content: content,
-            };
-            await API.graphql({
-            query: createPostMutation,
-            variables: { input: data },
-            });
-        }
-      
-        return (
-          <React.Fragment>
-            <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-              <TableCell>
-                <IconButton
-                  aria-label="expand row"
-                  size="small"
-                  onClick={() => {
-                    getPostsfromBlog(row);
-                    setOpen(!open);
-                  }}
-                >
-                  {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                </IconButton>
-              </TableCell>
-              <TableCell component="th" scope="row" align="center">
-                {row.name}
-              </TableCell>
-              <TableCell component="th" scope="row" align="center">
-                {row.updatedAt}
-              </TableCell>
-              <TableCell component="th" scope="row" align="center">
-                <CreateContent 
-                  callback={(title, content) => {
-                    const blogId = row.id;
-                    const data = {
-                        id: blogId,
-                        title: title,
-                        content: content
-                    };
-                    createPost(data);
-                  }}
-                />
-                <AlertDialog 
-                  callback={() => deleteBlog(row)}
-                />
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-                <Collapse in={open} timeout="auto" unmountOnExit>
-                  <Box sx={{ margin: 2 }}>
-                    <Typography variant="h6" gutterBottom component="div">
-                      Posts
-                    </Typography>
-                    <Table size="small" aria-label="purchases">
-                      <TableHead>
-                        <TableRow>
-                          <TableCell align="center">Post Name</TableCell>
-                          <TableCell align="center">Last Update At</TableCell>
-                          <TableCell align="center">Actions</TableCell>
+      async function getPostsfromBlog({ id }) {
+          const apiData = await API.graphql({
+            query: getBlogQuery,
+            variables: { id: id },
+          });
+          const postsFromAPI = apiData.data.getBlog.posts.items;
+          setPosts(postsFromAPI);
+      }
+
+      async function deletePost({ id }) {
+          const newPosts = posts.filter((post) => post.id !== id);
+          setPosts(newPosts);
+          await API.graphql({
+          query: deletePostMutation,
+          variables: { input: { id } },
+          });
+      }
+
+      async function createPost({id, title, content}) {
+          const data = {
+          blogPostsId: id,
+          title: title,
+          content: content,
+          };
+          await API.graphql({
+          query: createPostMutation,
+          variables: { input: data },
+          });
+      }
+    
+      return (
+        <React.Fragment>
+          <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+            <TableCell>
+              <IconButton
+                aria-label="expand row"
+                size="small"
+                onClick={() => {
+                  getPostsfromBlog(row);
+                  setOpen(!open);
+                }}
+              >
+                {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+              </IconButton>
+            </TableCell>
+            <TableCell component="th" scope="row" align="center">
+              {row.name}
+            </TableCell>
+            <TableCell component="th" scope="row" align="center">
+              {row.updatedAt}
+            </TableCell>
+            <TableCell component="th" scope="row" align="center">
+              <CreateContent 
+                callback={(title, content) => {
+                  const blogId = row.id;
+                  const data = {
+                      id: blogId,
+                      title: title,
+                      content: content
+                  };
+                  createPost(data);
+                }}
+              />
+              <AlertDialog 
+                callback={() => deleteBlog(row)}
+              />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+              <Collapse in={open} timeout="auto" unmountOnExit>
+                <Box sx={{ margin: 2 }}>
+                  <Typography variant="h6" gutterBottom component="div">
+                    Posts
+                  </Typography>
+                  <Table size="small" aria-label="purchases">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell align="center">Post Name</TableCell>
+                        <TableCell align="center">Last Update At</TableCell>
+                        <TableCell align="center">Actions</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                    {posts.map((post) => (
+                        <TableRow key={post.id || post.name}>
+                            <TableCell align="center">
+                            {post.title}
+                            </TableCell>
+                            <TableCell align="center">
+                            {post.updatedAt}
+                            </TableCell>
+                            <TableCell align="center">
+                              <AlertDialog 
+                                callback={() => deletePost(post)}
+                              />
+                            </TableCell>
                         </TableRow>
+                    ))}
+                    </TableBody>
+                  </Table>
+                </Box>
+              </Collapse>
+            </TableCell>
+          </TableRow>
+        </React.Fragment>
+      );
+    }
+    
+    Row.propTypes = {
+      row: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        updatedAt: PropTypes.string.isRequired,
+        post: PropTypes.arrayOf(
+          PropTypes.shape({
+            name: PropTypes.number.isRequired,
+            updatedAt: PropTypes.string.isRequired,
+          }),
+        ).isRequired,
+      }).isRequired,
+    };
+
+  return (
+      <body>
+      <div>
+          <View className="Blog">
+              <Heading level={3}>Create New Blog</Heading>
+              <View as="form" margin="3rem 0" onSubmit={createBlog}>
+                  <Flex direction="row" justifyContent="center">
+                  <TextField
+                      name="name"
+                      placeholder="Blog Name"
+                      label="Blog Name"
+                      labelHidden
+                      variation="quiet"
+                      required />
+                  <Button type="submit" variation="primary">
+                      Create Blog
+                  </Button>
+                  </Flex>
+              </View>
+              <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+                <TableContainer>
+                  <Table aria-label="collapsible table">
+                      <TableHead>
+                      <TableRow>
+                          <TableCell />
+                          <TableCell align="center">Blog Name</TableCell>
+                          <TableCell align="center">Last Updated At</TableCell>
+                          <TableCell align="center">Actions</TableCell>
+                      </TableRow>
                       </TableHead>
                       <TableBody>
-                      {posts.map((post) => (
-                          <TableRow key={post.id || post.name}>
-                              <TableCell align="center">
-                              {post.title}
-                              </TableCell>
-                              <TableCell align="center">
-                              {post.updatedAt}
-                              </TableCell>
-                              <TableCell align="center">
-                                <AlertDialog 
-                                  callback={() => deletePost(post)}
-                                />
-                              </TableCell>
-                          </TableRow>
-                      ))}
+                          {blogs.map((blog) => (
+                              <Row key={blog.id || blog.name} row={blog} />
+                          ))}
                       </TableBody>
-                    </Table>
-                  </Box>
-                </Collapse>
-              </TableCell>
-            </TableRow>
-          </React.Fragment>
-        );
-      }
-      
-      Row.propTypes = {
-        row: PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          updatedAt: PropTypes.string.isRequired,
-          post: PropTypes.arrayOf(
-            PropTypes.shape({
-              name: PropTypes.number.isRequired,
-              updatedAt: PropTypes.string.isRequired,
-            }),
-          ).isRequired,
-        }).isRequired,
-      };
-
-    return (
-        <body>
-        <div>
-            <View className="Blog">
-                <Heading level={3}>Create New Blog</Heading>
-                <View as="form" margin="3rem 0" onSubmit={createBlog}>
-                    <Flex direction="row" justifyContent="center">
-                    <TextField
-                        name="name"
-                        placeholder="Blog Name"
-                        label="Blog Name"
-                        labelHidden
-                        variation="quiet"
-                        required />
-                    <Button type="submit" variation="primary">
-                        Create Blog
-                    </Button>
-                    </Flex>
-                </View>
-                <TableContainer component={Paper}>
-                    <Table aria-label="collapsible table">
-                        <TableHead>
-                        <TableRow>
-                            <TableCell />
-                            <TableCell align="center">Blog Name</TableCell>
-                            <TableCell align="center">Last Updated At</TableCell>
-                            <TableCell align="center">Actions</TableCell>
-                        </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {blogs.map((blog) => (
-                                <Row key={blog.id || blog.name} row={blog} />
-                            ))}
-                        </TableBody>
-                    </Table>
-                    </TableContainer>
-            </View>
-        </div>
-        </body>
-    );
+                  </Table>
+                </TableContainer>
+                <TablePagination
+                  rowsPerPageOptions={[10, 25, 100]}
+                  component="div"
+                  count={blogs.length}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  onPageChange={handleChangePage}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+              </Paper>
+          </View>
+      </div>
+      </body>
+  );
 }
