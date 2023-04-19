@@ -113,6 +113,7 @@ const Blogs = () => {
                     <Text>
                       {blog.name}
                     </Text>
+                    <img style={{maxWidth: '100%', maxHeight: '100%', bottom:0}} src={require('../image/default_background.jpg')}/>
                   </Paper>
                 </div>
               ))}
