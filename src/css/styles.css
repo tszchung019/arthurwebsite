@@ -64,6 +64,17 @@ p {
     color: #031d6e;
 }
 
+.blogBox {
+    background: #fff;
+    text-align: center;
+    height: 45vh;
+    line-height: 60px;
+}
+
+.blogBox:hover {
+    background: #ededed;
+}
+
 .homeIcon {
     position: absolute;
     top: 10px;

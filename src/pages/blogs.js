@@ -109,7 +109,7 @@ const Blogs = () => {
             >
               {blogs.map((blog) => (
                 <div onClick={() => navigateToBlog(blog)}>
-                  <Paper sx={{textAlign: 'center', height: '45vh', lineHeight: '60px'}} key={blog.id || blog.name} elevation={6}>
+                  <Paper className="blogBox" key={blog.id || blog.name} elevation={6}>
                     <Text>
                       {blog.name}
                     </Text>
