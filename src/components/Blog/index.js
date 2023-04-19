@@ -88,7 +88,6 @@ const BlogPost = () => {
     }
 
     async function navigateToPost(post) {
-        console.log(post.content);
         navigate('../posts/' + post.id);
     }
 

@@ -4,11 +4,14 @@ import DrawerComponent from '../components/Drawer';
 import Navbar from '../components/Navbar';
 import {
 	useTheme,
-	useMediaQuery
+	useMediaQuery,
+  Paper,
+  Box,
+  Grid,
+  styled,
 } from "@mui/material";
 import { API } from "aws-amplify";
 import {
-  Button,
   Flex,
   Heading,
   Text,
@@ -35,7 +38,7 @@ import {
   updateComment as updateCommentMutation,
   deleteComment as deleteCommentMutation,
 } from "../graphql/mutations"
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import BlogPost from "../components/Blog";
 
 const Blogs = () => {
@@ -43,6 +46,7 @@ const Blogs = () => {
 
   const theme = useTheme();
 	const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchBlogs();
@@ -77,6 +81,10 @@ const Blogs = () => {
     });
   }
 
+  async function navigateToBlog(blog) {
+    navigate('./' + blog.id);
+  }
+
   return (
     <body>
     <div>
@@ -90,23 +98,26 @@ const Blogs = () => {
         <h1>Welcome to Arthur's Blogs</h1>
         <View className="Blog">
           <Heading level={2}>Current Blogs</Heading>
-          <View margin="3rem 0">
-            {blogs.map((blog) => (
-              <Flex
-                key={blog.id || blog.name}
-                direction="row"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <NavLink
-                  to={'./' + blog.id}
-                  component={BlogPost}
-                >
-                  {blog.name}
-                </NavLink>
-              </Flex>
-            ))}
-          </View>
+          <Grid item xs={6}>
+            <Box
+              sx={{
+                p: 2,
+                display: 'grid',
+                gridTemplateColumns: { md: '1fr 1fr 1fr' },
+                gap: 2,
+              }}
+            >
+              {blogs.map((blog) => (
+                <div onClick={() => navigateToBlog(blog)}>
+                  <Paper sx={{textAlign: 'center', height: '45vh', lineHeight: '60px'}} key={blog.id || blog.name} elevation={6}>
+                    <Text>
+                      {blog.name}
+                    </Text>
+                  </Paper>
+                </div>
+              ))}
+            </Box>
+          </Grid>
         </View>
       </div>
       </body>
