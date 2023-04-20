@@ -65,10 +65,17 @@ p {
 }
 
 .blogBox {
+    position: relative;
     background: #fff;
     text-align: center;
     height: 45vh;
     line-height: 60px;
+}
+
+.blogBox img {
+    position: absolute;
+    left: 0;
+    bottom: 0;
 }
 
 .blogBox:hover {
