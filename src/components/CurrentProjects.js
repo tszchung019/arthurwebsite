@@ -7,6 +7,20 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import { Button } from '@mui/material';
+
+import { API } from "aws-amplify";
+import {
+  getUser as getUserQuery,
+  listUsers as listUsersQuery,
+  getProject as getProjectQuery,
+  listProjects as listProjectsQuery,
+} from "../graphql/queries"
+import {
+  createProject as createProjectMutation,
+  updateProject as updateProjectMutation,
+  deleteProject as deleteProjectMutation,
+} from "../graphql/mutations"
 
 const columns = [
   { id: 'name', label: 'Project Name', minWidth: 170 },
@@ -46,9 +60,10 @@ const rows = [
   createData('Demo Project 5', '01/02/2023', 60, true),
 ];
 
-export default function CurrentProjects() {
+export default function CurrentProjects({user}) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [currentUser, setUser] = React.useState(user);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -61,6 +76,7 @@ export default function CurrentProjects() {
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <Button onClick={() => {console.log(currentUser)}}>Current User</Button>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>

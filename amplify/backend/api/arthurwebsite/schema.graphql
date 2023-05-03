@@ -21,3 +21,18 @@ type Comment @model {
   post: Post @belongsTo
   content: String!
 }
+
+type User @model {
+  id: ID!
+  name: String!
+  projects: [Project] @hasMany
+}
+
+type Project @model {
+  id: ID!
+  name: String!
+  description: String!
+  completion: Float
+  status: Boolean
+  user: User @belongsTo
+}

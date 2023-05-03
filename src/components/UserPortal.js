@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import CurrentProjects from './CurrentProjects';
 import Timeline from './Timeline';
+import NewProject from './NewProject';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -40,8 +41,9 @@ function a11yProps(index) {
   };
 }
 
-export default function BasicTabs() {
+export default function BasicTabs({user}) {
   const [value, setValue] = React.useState(0);
+  const [currentUser, setUser] = React.useState(user);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -57,10 +59,14 @@ export default function BasicTabs() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        Item One
+        <NewProject 
+          user={currentUser}
+        />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <CurrentProjects />
+        <CurrentProjects
+          user={currentUser}
+        />
       </TabPanel>
       <TabPanel value={value} index={2}>
         <Timeline />

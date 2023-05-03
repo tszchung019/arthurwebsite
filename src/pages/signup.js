@@ -35,7 +35,9 @@ export default function SignUp() {
                 </section>
               )}
               <section id='userPortal'>
-                <BasicTabs />
+                <BasicTabs
+                  user={user.username}
+                />
               </section>
             </div>
           </main>
