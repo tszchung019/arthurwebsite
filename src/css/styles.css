@@ -68,12 +68,14 @@ p {
     position: relative;
     background: #fff;
     text-align: center;
-    height: 45vh;
+    height: 60vh;
     line-height: 60px;
 }
 
 .blogBox img {
     position: absolute;
+    height: 25vh;
+    width: 100%;
     left: 0;
     bottom: 0;
 }

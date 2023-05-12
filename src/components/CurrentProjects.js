@@ -12,10 +12,12 @@ import { Button } from '@mui/material';
 import { API } from "aws-amplify";
 import {
   getUser as getUserQuery,
-  listUsers as listUsersQuery,
   getProject as getProjectQuery,
   listProjects as listProjectsQuery,
 } from "../graphql/queries"
+import {
+  listUsers as listUsersQuery,
+} from "../graphql/customQueries"
 import {
   createProject as createProjectMutation,
   updateProject as updateProjectMutation,
@@ -25,11 +27,11 @@ import {
 const columns = [
   { id: 'name', label: 'Project Name', minWidth: 170 },
   {
-    id: 'startDate',
+    id: 'createdAt',
     label: 'Start Date',
     minWidth: 170,
     align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
+    format: (value) => value.toLocaleString('en-GB', { timeZone: 'UTC' }),
   },
   {
     id: 'completion',
@@ -47,23 +49,24 @@ const columns = [
   },
 ];
 
-function createData(name, startDate, completion, pjStatus) {
-    const status = pjStatus ? 'Active' : 'Inactive';
-  return { name, startDate, completion, status };
-}
-
-const rows = [
-  createData('Demo Project 1', '12/03/2021', 100, false),
-  createData('Demo Project 2', '27/08/2021', 100, false),
-  createData('Demo Project 3', '05/02/2022', 25, false),
-  createData('Demo Project 4', '26/07/2022', 75, true),
-  createData('Demo Project 5', '01/02/2023', 60, true),
-];
-
 export default function CurrentProjects({user}) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [currentUser, setUser] = React.useState(user);
+  const [projects, setProjects] = React.useState([]);
+
+  React.useEffect(() => {
+    fetchUsers(user);
+  }, []);
+
+  async function fetchUsers(username) {
+
+    const apiData = await API.graphql({
+      query: listUsersQuery,
+      variables: {filter: {name: {eq: username}}},
+    });
+    const usersFromAPI = apiData.data.listUsers.items[0].projects.items;
+    setProjects(usersFromAPI);
+  }
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -76,7 +79,6 @@ export default function CurrentProjects({user}) {
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <Button onClick={() => {console.log(currentUser)}}>Current User</Button>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -93,16 +95,16 @@ export default function CurrentProjects({user}) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
+            {projects
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
+              .map((project) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                  <TableRow hover role="checkbox">
                     {columns.map((column) => {
-                      const value = row[column.id];
+                      const value = project[column.id];
                       return (
                         <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
+                          {column.format && (typeof value === 'number' || typeof value === 'boolean')
                             ? column.format(value)
                             : value}
                         </TableCell>
@@ -117,7 +119,7 @@ export default function CurrentProjects({user}) {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={rows.length}
+        count={projects.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
