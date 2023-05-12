@@ -110,12 +110,22 @@ const Blogs = () => {
               {blogs.map((blog) => (
                 <div onClick={() => navigateToBlog(blog)}>
                   <Paper className="blogBox" key={blog.id || blog.name} elevation={6}>
-                    <Text>
-                      {blog.name}
-                    </Text>
-                    <img style={{maxWidth: '100%', maxHeight: '100%', bottom:0}} src={
-                      blog.name == 'My first blog' ? require('../image/default_background.jpg') : require('../image/investment.jpg')
-                      }/>
+                    <div className="blogBox-title">
+                      <Text>
+                        {blog.name}
+                      </Text>
+                    </div>
+                    <div className="blogBox-summary">
+                      <Text>
+                        {blog.summary}
+                      </Text>
+                    </div>
+                    <div>
+                      <img style={{maxWidth: '100%', maxHeight: '100%', bottom:0}} src={
+                        blog.name == 'Computer Science' ? require('../image/computer_science.jpg')
+                        : blog.name == 'Investment'? require('../image/investment.jpg') : require('../image/default_background.jpg')
+                        }/>
+                    </div>
                   </Paper>
                 </div>
               ))}

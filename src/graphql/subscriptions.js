@@ -6,6 +6,7 @@ export const onCreateBlog = /* GraphQL */ `
     onCreateBlog(filter: $filter) {
       id
       name
+      summary
       posts {
         items {
           id
@@ -27,6 +28,7 @@ export const onUpdateBlog = /* GraphQL */ `
     onUpdateBlog(filter: $filter) {
       id
       name
+      summary
       posts {
         items {
           id
@@ -48,6 +50,7 @@ export const onDeleteBlog = /* GraphQL */ `
     onDeleteBlog(filter: $filter) {
       id
       name
+      summary
       posts {
         items {
           id
@@ -73,6 +76,7 @@ export const onCreatePost = /* GraphQL */ `
       blog {
         id
         name
+        summary
         posts {
           nextToken
         }
@@ -104,6 +108,7 @@ export const onUpdatePost = /* GraphQL */ `
       blog {
         id
         name
+        summary
         posts {
           nextToken
         }
@@ -135,6 +140,7 @@ export const onDeletePost = /* GraphQL */ `
       blog {
         id
         name
+        summary
         posts {
           nextToken
         }
@@ -168,6 +174,7 @@ export const onCreateComment = /* GraphQL */ `
         blog {
           id
           name
+          summary
           createdAt
           updatedAt
         }
@@ -196,6 +203,7 @@ export const onUpdateComment = /* GraphQL */ `
         blog {
           id
           name
+          summary
           createdAt
           updatedAt
         }
@@ -224,6 +232,7 @@ export const onDeleteComment = /* GraphQL */ `
         blog {
           id
           name
+          summary
           createdAt
           updatedAt
         }

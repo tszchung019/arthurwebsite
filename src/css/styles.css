@@ -72,6 +72,22 @@ p {
     line-height: 60px;
 }
 
+.blogBox-title {
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    line-height: normal;
+    background-color: aquamarine;
+}
+
+.blogBox-summary {
+    font-size: small;
+    padding: 10px 20px;
+    line-height: normal;
+}
+
 .blogBox img {
     position: absolute;
     height: 25vh;
