@@ -14,17 +14,22 @@ import DrawerComponent from '../Drawer';
 import Navbar from '../Navbar';
 import {
 	useTheme,
-	useMediaQuery
+	useMediaQuery,
+    Box,
+    TextField,
+    Button,
 } from "@mui/material";
 import { NavLink, useParams } from "react-router-dom";
 import Paper from '@mui/material/Paper';
 import { Translate } from "@mui/icons-material";
+import CustomizedDividers from "../Props/CustomizedDividers";
 
 const Post = () => {
     const theme = useTheme();
 	const isMobile = useMediaQuery(theme.breakpoints.down("md"));
     const {id} = useParams();
     const [post, setPost] = useState([]);
+    const [comments, setComments] = useState([]);
 
     useEffect(() => {
         getContentfromPost({id});
@@ -38,6 +43,7 @@ const Post = () => {
         const postsFromAPI = apiData.data.getPost;
         console.log(postsFromAPI);
         setPost(postsFromAPI);
+        setComments(postsFromAPI.comments.items);
     }
 
     return (
@@ -60,6 +66,32 @@ const Post = () => {
                     <section>
                         <p>{post.content}</p>
                     </section>
+                </Paper>
+                <Paper>
+                    <Box>
+                        <section>
+                            <Heading level={2}>Comment</Heading>
+                        </section>
+                        {
+                            comments.length > 0? comments.map((comment) => (
+                                <Text>{comment.content}</Text>
+                            )) : (<Text>There is no content</Text>)
+                        }
+                        <section>
+                            <CustomizedDividers/>
+                        </section>
+                        <section>
+                        <TextField
+                            id="filled-textarea"
+                            label="Multiline Placeholder"
+                            placeholder="Placeholder"
+                            fullWidth
+                            multiline
+                            variant="filled"
+                        />
+                        <Button variant="text">Post</Button>
+                        </section>
+                    </Box>
                 </Paper>
                 <NavLink to={'/blogs'}>Return to Blog</NavLink>
             </View>

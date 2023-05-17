@@ -187,21 +187,23 @@ export default function ManageBlogs() {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                    {posts.map((post) => (
-                        <TableRow key={post.id || post.name}>
-                            <TableCell align="center">
-                            {post.title}
-                            </TableCell>
-                            <TableCell align="center">
-                            {post.updatedAt}
-                            </TableCell>
-                            <TableCell align="center">
-                              <AlertDialog 
-                                callback={() => deletePost(post)}
-                              />
-                            </TableCell>
-                        </TableRow>
-                    ))}
+                    {
+                      posts.length > 0? posts.map((post) => (
+                          <TableRow key={post.id || post.name}>
+                              <TableCell align="center">
+                              {post.title}
+                              </TableCell>
+                              <TableCell align="center">
+                              {post.updatedAt}
+                              </TableCell>
+                              <TableCell align="center">
+                                <AlertDialog 
+                                  callback={() => deletePost(post)}
+                                />
+                              </TableCell>
+                          </TableRow>
+                      )) : (<TableRow><TableCell colSpan={3} align="center">There is no content</TableCell></TableRow>)
+                    }
                     </TableBody>
                   </Table>
                 </Box>

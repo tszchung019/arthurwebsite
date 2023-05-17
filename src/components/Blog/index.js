@@ -120,7 +120,8 @@ const BlogPost = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {posts.map((post) => {
+                        {
+                            posts.length > 0? posts.map((post) => {
                                 return (
                                 <TableRow hover role="checkbox" tabIndex={-1} key={post.id} onClick={() => navigateToPost(post)}>
                                     <TableCell>
@@ -131,7 +132,8 @@ const BlogPost = () => {
                                     </TableCell>
                                 </TableRow>
                                 );
-                            })}
+                            }) : (<TableRow><TableCell colSpan={3} align="center">There is no content</TableCell></TableRow>)
+                        }
                         </TableBody>
                         </Table>
                     </TableContainer>
