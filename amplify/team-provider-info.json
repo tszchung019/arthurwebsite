@@ -20,5 +20,24 @@
         "arthurwebsite": {}
       }
     }
+  },
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-arthurwebsite-dev-140305-authRole",
+      "UnauthRoleArn": "arn:aws:iam::503161023733:role/amplify-arthurwebsite-dev-140305-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::503161023733:role/amplify-arthurwebsite-dev-140305-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-arthurwebsite-dev-140305-deployment",
+      "UnauthRoleName": "amplify-arthurwebsite-dev-140305-unauthRole",
+      "StackName": "amplify-arthurwebsite-dev-140305",
+      "StackId": "arn:aws:cloudformation:us-east-1:503161023733:stack/amplify-arthurwebsite-dev-140305/151f1220-dfb0-11ee-a5fa-0edf97195147",
+      "AmplifyAppId": "dmkfe2brhayeb"
+    },
+    "categories": {
+      "auth": {
+        "arthurwebsited39bd1b9": {},
+        "userPoolGroups": {}
+      }
+    }
   }
 }
