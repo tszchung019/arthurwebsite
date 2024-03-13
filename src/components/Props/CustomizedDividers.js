@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useRef } from 'react';
 import { styled } from '@mui/material/styles';
 import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
 import FormatAlignCenterIcon from '@mui/icons-material/FormatAlignCenter';
@@ -30,16 +30,36 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
   },
 }));
 
-export default function CustomizedDividers() {
-  const [alignment, setAlignment] = React.useState('left');
-  const [formats, setFormats] = React.useState(() => ['italic']);
+const CustomizedDividers = () => {
+  const [alignment, setAlignment] = useState('left');
+  const [formats, setFormats] = useState(() => ['italic']);
+  const contentEditableRef = useRef(null);
 
   const handleFormat = (event, newFormats) => {
     setFormats(newFormats);
+    applyStylesToSelection();
   };
 
   const handleAlignment = (event, newAlignment) => {
     setAlignment(newAlignment);
+    applyStylesToSelection();
+  };
+
+  const applyStylesToSelection = (appliedFormats) => {
+    const selection = window.getSelection();
+  
+    if (appliedFormats && appliedFormats.length > 0 && selection.rangeCount > 0) {
+      const range = selection.getRangeAt(0);
+      const span = document.createElement('span');
+  
+      // Apply styles to the newly created span
+      appliedFormats.forEach((format) => {
+        span.style[format] = 'inherit';
+      });
+  
+      // Surround the selected text with the styled span
+      range.surroundContents(span);
+    }
   };
 
   return (
@@ -59,18 +79,7 @@ export default function CustomizedDividers() {
           onChange={handleAlignment}
           aria-label="text alignment"
         >
-          <ToggleButton value="left" aria-label="left aligned">
-            <FormatAlignLeftIcon />
-          </ToggleButton>
-          <ToggleButton value="center" aria-label="centered">
-            <FormatAlignCenterIcon />
-          </ToggleButton>
-          <ToggleButton value="right" aria-label="right aligned">
-            <FormatAlignRightIcon />
-          </ToggleButton>
-          <ToggleButton value="justify" aria-label="justified" disabled>
-            <FormatAlignJustifyIcon />
-          </ToggleButton>
+          {/* Alignment buttons... */}
         </StyledToggleButtonGroup>
         <Divider flexItem orientation="vertical" sx={{ mx: 0.5, my: 1 }} />
         <StyledToggleButtonGroup
@@ -79,13 +88,22 @@ export default function CustomizedDividers() {
           onChange={handleFormat}
           aria-label="text formatting"
         >
-          <ToggleButton value="bold" aria-label="bold">
+          <ToggleButton
+            value="bold"
+            aria-label="bold"
+          >
             <FormatBoldIcon />
           </ToggleButton>
-          <ToggleButton value="italic" aria-label="italic">
+          <ToggleButton
+            value="italic"
+            aria-label="italic"
+          >
             <FormatItalicIcon />
           </ToggleButton>
-          <ToggleButton value="underlined" aria-label="underlined">
+          <ToggleButton
+            value="underlined"
+            aria-label="underlined"
+          >
             <FormatUnderlinedIcon />
           </ToggleButton>
           <ToggleButton value="color" aria-label="color" disabled>
@@ -94,6 +112,17 @@ export default function CustomizedDividers() {
           </ToggleButton>
         </StyledToggleButtonGroup>
       </Paper>
+      <div
+        ref={contentEditableRef}
+        contentEditable
+        style={{
+          border: '1px solid #ccc',
+          minHeight: '100px',
+          padding: '8px',
+        }}
+      ></div>
     </div>
   );
-}
+};
+
+export default CustomizedDividers;

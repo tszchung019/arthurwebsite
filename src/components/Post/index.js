@@ -64,7 +64,7 @@ const Post = () => {
                         <Heading level={2}>{post.title}</Heading>
                     </section>
                     <section>
-                        <p>{post.content}</p>
+                        <div dangerouslySetInnerHTML={{ __html: post.content }} />
                     </section>
                 </Paper>
                 <Paper>
@@ -81,14 +81,6 @@ const Post = () => {
                             <CustomizedDividers/>
                         </section>
                         <section>
-                        <TextField
-                            id="filled-textarea"
-                            label="Multiline Placeholder"
-                            placeholder="Placeholder"
-                            fullWidth
-                            multiline
-                            variant="filled"
-                        />
                         <Button variant="text">Post</Button>
                         </section>
                     </Box>
