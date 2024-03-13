@@ -8,12 +8,18 @@ export const getBlog = /* GraphQL */ `
       name
       summary
       posts {
+        items {
+          id
+          title
+          content
+          createdAt
+          updatedAt
+          blogPostsId
+        }
         nextToken
-        __typename
       }
       createdAt
       updatedAt
-      __typename
     }
   }
 `;
@@ -28,12 +34,13 @@ export const listBlogs = /* GraphQL */ `
         id
         name
         summary
+        posts {
+          nextToken
+        }
         createdAt
         updatedAt
-        __typename
       }
       nextToken
-      __typename
     }
   }
 `;
@@ -47,18 +54,25 @@ export const getPost = /* GraphQL */ `
         id
         name
         summary
+        posts {
+          nextToken
+        }
         createdAt
         updatedAt
-        __typename
       }
       comments {
+        items {
+          id
+          content
+          createdAt
+          updatedAt
+          postCommentsId
+        }
         nextToken
-        __typename
       }
       createdAt
       updatedAt
       blogPostsId
-      __typename
     }
   }
 `;
@@ -73,13 +87,21 @@ export const listPosts = /* GraphQL */ `
         id
         title
         content
+        blog {
+          id
+          name
+          summary
+          createdAt
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
         createdAt
         updatedAt
         blogPostsId
-        __typename
       }
       nextToken
-      __typename
     }
   }
 `;
@@ -91,16 +113,24 @@ export const getComment = /* GraphQL */ `
         id
         title
         content
+        blog {
+          id
+          name
+          summary
+          createdAt
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
         createdAt
         updatedAt
         blogPostsId
-        __typename
       }
       content
       createdAt
       updatedAt
       postCommentsId
-      __typename
     }
   }
 `;
@@ -113,14 +143,20 @@ export const listComments = /* GraphQL */ `
     listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        post {
+          id
+          title
+          content
+          createdAt
+          updatedAt
+          blogPostsId
+        }
         content
         createdAt
         updatedAt
         postCommentsId
-        __typename
       }
       nextToken
-      __typename
     }
   }
 `;
@@ -130,12 +166,20 @@ export const getUser = /* GraphQL */ `
       id
       name
       projects {
+        items {
+          id
+          name
+          description
+          completion
+          status
+          createdAt
+          updatedAt
+          userProjectsId
+        }
         nextToken
-        __typename
       }
       createdAt
       updatedAt
-      __typename
     }
   }
 `;
@@ -149,12 +193,13 @@ export const listUsers = /* GraphQL */ `
       items {
         id
         name
+        projects {
+          nextToken
+        }
         createdAt
         updatedAt
-        __typename
       }
       nextToken
-      __typename
     }
   }
 `;
@@ -169,14 +214,15 @@ export const getProject = /* GraphQL */ `
       user {
         id
         name
+        projects {
+          nextToken
+        }
         createdAt
         updatedAt
-        __typename
       }
       createdAt
       updatedAt
       userProjectsId
-      __typename
     }
   }
 `;
@@ -193,13 +239,17 @@ export const listProjects = /* GraphQL */ `
         description
         completion
         status
+        user {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         userProjectsId
-        __typename
       }
       nextToken
-      __typename
     }
   }
 `;

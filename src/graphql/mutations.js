@@ -11,12 +11,18 @@ export const createBlog = /* GraphQL */ `
       name
       summary
       posts {
+        items {
+          id
+          title
+          content
+          createdAt
+          updatedAt
+          blogPostsId
+        }
         nextToken
-        __typename
       }
       createdAt
       updatedAt
-      __typename
     }
   }
 `;
@@ -30,12 +36,18 @@ export const updateBlog = /* GraphQL */ `
       name
       summary
       posts {
+        items {
+          id
+          title
+          content
+          createdAt
+          updatedAt
+          blogPostsId
+        }
         nextToken
-        __typename
       }
       createdAt
       updatedAt
-      __typename
     }
   }
 `;
@@ -49,12 +61,18 @@ export const deleteBlog = /* GraphQL */ `
       name
       summary
       posts {
+        items {
+          id
+          title
+          content
+          createdAt
+          updatedAt
+          blogPostsId
+        }
         nextToken
-        __typename
       }
       createdAt
       updatedAt
-      __typename
     }
   }
 `;
@@ -71,18 +89,25 @@ export const createPost = /* GraphQL */ `
         id
         name
         summary
+        posts {
+          nextToken
+        }
         createdAt
         updatedAt
-        __typename
       }
       comments {
+        items {
+          id
+          content
+          createdAt
+          updatedAt
+          postCommentsId
+        }
         nextToken
-        __typename
       }
       createdAt
       updatedAt
       blogPostsId
-      __typename
     }
   }
 `;
@@ -99,18 +124,25 @@ export const updatePost = /* GraphQL */ `
         id
         name
         summary
+        posts {
+          nextToken
+        }
         createdAt
         updatedAt
-        __typename
       }
       comments {
+        items {
+          id
+          content
+          createdAt
+          updatedAt
+          postCommentsId
+        }
         nextToken
-        __typename
       }
       createdAt
       updatedAt
       blogPostsId
-      __typename
     }
   }
 `;
@@ -127,18 +159,25 @@ export const deletePost = /* GraphQL */ `
         id
         name
         summary
+        posts {
+          nextToken
+        }
         createdAt
         updatedAt
-        __typename
       }
       comments {
+        items {
+          id
+          content
+          createdAt
+          updatedAt
+          postCommentsId
+        }
         nextToken
-        __typename
       }
       createdAt
       updatedAt
       blogPostsId
-      __typename
     }
   }
 `;
@@ -153,16 +192,24 @@ export const createComment = /* GraphQL */ `
         id
         title
         content
+        blog {
+          id
+          name
+          summary
+          createdAt
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
         createdAt
         updatedAt
         blogPostsId
-        __typename
       }
       content
       createdAt
       updatedAt
       postCommentsId
-      __typename
     }
   }
 `;
@@ -177,16 +224,24 @@ export const updateComment = /* GraphQL */ `
         id
         title
         content
+        blog {
+          id
+          name
+          summary
+          createdAt
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
         createdAt
         updatedAt
         blogPostsId
-        __typename
       }
       content
       createdAt
       updatedAt
       postCommentsId
-      __typename
     }
   }
 `;
@@ -201,16 +256,24 @@ export const deleteComment = /* GraphQL */ `
         id
         title
         content
+        blog {
+          id
+          name
+          summary
+          createdAt
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
         createdAt
         updatedAt
         blogPostsId
-        __typename
       }
       content
       createdAt
       updatedAt
       postCommentsId
-      __typename
     }
   }
 `;
@@ -223,12 +286,20 @@ export const createUser = /* GraphQL */ `
       id
       name
       projects {
+        items {
+          id
+          name
+          description
+          completion
+          status
+          createdAt
+          updatedAt
+          userProjectsId
+        }
         nextToken
-        __typename
       }
       createdAt
       updatedAt
-      __typename
     }
   }
 `;
@@ -241,12 +312,20 @@ export const updateUser = /* GraphQL */ `
       id
       name
       projects {
+        items {
+          id
+          name
+          description
+          completion
+          status
+          createdAt
+          updatedAt
+          userProjectsId
+        }
         nextToken
-        __typename
       }
       createdAt
       updatedAt
-      __typename
     }
   }
 `;
@@ -259,12 +338,20 @@ export const deleteUser = /* GraphQL */ `
       id
       name
       projects {
+        items {
+          id
+          name
+          description
+          completion
+          status
+          createdAt
+          updatedAt
+          userProjectsId
+        }
         nextToken
-        __typename
       }
       createdAt
       updatedAt
-      __typename
     }
   }
 `;
@@ -282,14 +369,15 @@ export const createProject = /* GraphQL */ `
       user {
         id
         name
+        projects {
+          nextToken
+        }
         createdAt
         updatedAt
-        __typename
       }
       createdAt
       updatedAt
       userProjectsId
-      __typename
     }
   }
 `;
@@ -307,14 +395,15 @@ export const updateProject = /* GraphQL */ `
       user {
         id
         name
+        projects {
+          nextToken
+        }
         createdAt
         updatedAt
-        __typename
       }
       createdAt
       updatedAt
       userProjectsId
-      __typename
     }
   }
 `;
@@ -332,14 +421,15 @@ export const deleteProject = /* GraphQL */ `
       user {
         id
         name
+        projects {
+          nextToken
+        }
         createdAt
         updatedAt
-        __typename
       }
       createdAt
       updatedAt
       userProjectsId
-      __typename
     }
   }
 `;
