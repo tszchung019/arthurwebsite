@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import TextField from '@mui/material/TextField';
+import TextEditor from './TextEditor';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -20,6 +21,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function CreateContent({callback}) {
   const [open, setOpen] = React.useState(false);
+  const [content, setContent] = React.useState(''); // State to hold the content
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -29,9 +31,12 @@ export default function CreateContent({callback}) {
     setOpen(false);
   };
 
+  const handleContentChange = (newContent) => {
+    setContent(newContent); // Update the content state with the new content
+  }
+
   const handleCallback = () => {
     var title = document.getElementById("title").value;
-    var content = document.getElementById("content").value;
     if(typeof callback === 'function') {
         callback(title, content);
     }
@@ -81,18 +86,8 @@ export default function CreateContent({callback}) {
             />
           </ListItem>
           <Divider />
-          <ListItem>
-            < TextField
-              id="content"
-              label="Content"
-              placeholder="Content"
-              helperText="The content of the post"
-              variant="standard"
-              multiline
-              rows={20}
-              fullWidth
-              required
-            />
+          <ListItem sx={{ width: '100%' }}>
+            <TextEditor onContentChange={handleContentChange}/>
           </ListItem>
         </List>
       </Dialog>
