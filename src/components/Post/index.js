@@ -22,7 +22,7 @@ import {
 import { NavLink, useParams } from "react-router-dom";
 import Paper from '@mui/material/Paper';
 import { Translate } from "@mui/icons-material";
-import CustomizedDividers from "../Props/CustomizedDividers";
+import TextEditor from "../Props/TextEditor";
 
 const Post = () => {
     const theme = useTheme();
@@ -59,6 +59,7 @@ const Post = () => {
                 <Paper sx={{
                     padding: '10px 20px',
                     height: '80vh',
+                    overflow: 'auto'
                 }}>
                     <section>
                         <Heading level={2}>{post.title}</Heading>
@@ -78,7 +79,7 @@ const Post = () => {
                             )) : (<Text>There is no content</Text>)
                         }
                         <section>
-                            <CustomizedDividers/>
+                            <TextEditor/>
                         </section>
                         <section>
                         <Button variant="text">Post</Button>

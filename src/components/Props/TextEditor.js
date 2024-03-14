@@ -38,7 +38,7 @@ const TextEditor = ({ onContentChange }) => {
 
   return (
     <div>
-      <div style={{ display: "grid", justifyContent: "center"}}>
+      <div style={{ display: "grid"}}>
         <ReactQuill
           theme="snow"
           modules={modules}
