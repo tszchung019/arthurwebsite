@@ -25,7 +25,7 @@ export default function AlertDialog({callback}) {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="outlined" onClick={handleClickOpen} style={{ fontSize: '0.8rem' }}>
         Delete
       </Button>
       <Dialog

@@ -44,7 +44,7 @@ export default function CreateContent({callback}) {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="outlined" onClick={handleClickOpen} style={{ fontSize: '0.8rem' }}>
         Create Post
       </Button>
       <Dialog

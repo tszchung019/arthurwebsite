@@ -155,20 +155,22 @@ export default function ManageBlogs() {
               {row.updatedAt}
             </TableCell>
             <TableCell component="th" scope="row" align="center">
-              <CreateContent 
-                callback={(title, content) => {
-                  const blogId = row.id;
-                  const data = {
-                      id: blogId,
-                      title: title,
-                      content: content
-                  };
-                  createPost(data);
-                }}
-              />
-              <AlertDialog 
-                callback={() => deleteBlog(row)}
-              />
+              <Flex direction="row">
+                <CreateContent 
+                  callback={(title, content) => {
+                    const blogId = row.id;
+                    const data = {
+                        id: blogId,
+                        title: title,
+                        content: content
+                    };
+                    createPost(data);
+                  }}
+                />
+                <AlertDialog 
+                  callback={() => deleteBlog(row)}
+                />
+              </Flex>
             </TableCell>
           </TableRow>
           <TableRow>
