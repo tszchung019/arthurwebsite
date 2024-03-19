@@ -40,6 +40,7 @@ import {
 } from "../graphql/mutations"
 import { NavLink, useNavigate } from "react-router-dom";
 import BlogPost from "../components/Blog";
+import { S3, GetObjectCommand, S3Client } from '@aws-sdk/client-s3';
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState([]);
@@ -47,6 +48,13 @@ const Blogs = () => {
   const theme = useTheme();
 	const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const navigate = useNavigate();
+
+  // TODO: Avoid require links to AWS service on client side
+  /*
+    1, Make a HTTP call to invoke a Lambda function
+    2, In the Lambda function, get the object and return as a WebStream content
+  */
+  const s3bucket = process.env.REACT_APP_S3_BUCKET;
 
   useEffect(() => {
     fetchBlogs();
@@ -121,10 +129,7 @@ const Blogs = () => {
                       </Text>
                     </div>
                     <div>
-                      <img style={{maxWidth: '100%', maxHeight: '100%', bottom:0}} src={
-                        blog.name == 'Computer Science' ? require('../image/computer_science.jpg')
-                        : blog.name == 'Investment'? require('../image/investment.jpg') : require('../image/default_background.jpg')
-                        }/>
+                      <img style={{maxWidth: '100%', maxHeight: '100%', bottom:0}} src={ s3bucket + blog.imgPath }/>
                     </div>
                   </Paper>
                 </div>

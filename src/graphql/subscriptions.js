@@ -7,19 +7,14 @@ export const onCreateBlog = /* GraphQL */ `
       id
       name
       summary
+      imgPath
       posts {
-        items {
-          id
-          title
-          content
-          createdAt
-          updatedAt
-          blogPostsId
-        }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -29,19 +24,14 @@ export const onUpdateBlog = /* GraphQL */ `
       id
       name
       summary
+      imgPath
       posts {
-        items {
-          id
-          title
-          content
-          createdAt
-          updatedAt
-          blogPostsId
-        }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -51,19 +41,14 @@ export const onDeleteBlog = /* GraphQL */ `
       id
       name
       summary
+      imgPath
       posts {
-        items {
-          id
-          title
-          content
-          createdAt
-          updatedAt
-          blogPostsId
-        }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -77,25 +62,19 @@ export const onCreatePost = /* GraphQL */ `
         id
         name
         summary
-        posts {
-          nextToken
-        }
+        imgPath
         createdAt
         updatedAt
+        __typename
       }
       comments {
-        items {
-          id
-          content
-          createdAt
-          updatedAt
-          postCommentsId
-        }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
       blogPostsId
+      __typename
     }
   }
 `;
@@ -109,25 +88,19 @@ export const onUpdatePost = /* GraphQL */ `
         id
         name
         summary
-        posts {
-          nextToken
-        }
+        imgPath
         createdAt
         updatedAt
+        __typename
       }
       comments {
-        items {
-          id
-          content
-          createdAt
-          updatedAt
-          postCommentsId
-        }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
       blogPostsId
+      __typename
     }
   }
 `;
@@ -141,25 +114,19 @@ export const onDeletePost = /* GraphQL */ `
         id
         name
         summary
-        posts {
-          nextToken
-        }
+        imgPath
         createdAt
         updatedAt
+        __typename
       }
       comments {
-        items {
-          id
-          content
-          createdAt
-          updatedAt
-          postCommentsId
-        }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
       blogPostsId
+      __typename
     }
   }
 `;
@@ -171,24 +138,16 @@ export const onCreateComment = /* GraphQL */ `
         id
         title
         content
-        blog {
-          id
-          name
-          summary
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
         createdAt
         updatedAt
         blogPostsId
+        __typename
       }
       content
       createdAt
       updatedAt
       postCommentsId
+      __typename
     }
   }
 `;
@@ -200,24 +159,16 @@ export const onUpdateComment = /* GraphQL */ `
         id
         title
         content
-        blog {
-          id
-          name
-          summary
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
         createdAt
         updatedAt
         blogPostsId
+        __typename
       }
       content
       createdAt
       updatedAt
       postCommentsId
+      __typename
     }
   }
 `;
@@ -229,24 +180,16 @@ export const onDeleteComment = /* GraphQL */ `
         id
         title
         content
-        blog {
-          id
-          name
-          summary
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
         createdAt
         updatedAt
         blogPostsId
+        __typename
       }
       content
       createdAt
       updatedAt
       postCommentsId
+      __typename
     }
   }
 `;
@@ -256,20 +199,12 @@ export const onCreateUser = /* GraphQL */ `
       id
       name
       projects {
-        items {
-          id
-          name
-          description
-          completion
-          status
-          createdAt
-          updatedAt
-          userProjectsId
-        }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -279,20 +214,12 @@ export const onUpdateUser = /* GraphQL */ `
       id
       name
       projects {
-        items {
-          id
-          name
-          description
-          completion
-          status
-          createdAt
-          updatedAt
-          userProjectsId
-        }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -302,20 +229,12 @@ export const onDeleteUser = /* GraphQL */ `
       id
       name
       projects {
-        items {
-          id
-          name
-          description
-          completion
-          status
-          createdAt
-          updatedAt
-          userProjectsId
-        }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -330,15 +249,14 @@ export const onCreateProject = /* GraphQL */ `
       user {
         id
         name
-        projects {
-          nextToken
-        }
         createdAt
         updatedAt
+        __typename
       }
       createdAt
       updatedAt
       userProjectsId
+      __typename
     }
   }
 `;
@@ -353,15 +271,14 @@ export const onUpdateProject = /* GraphQL */ `
       user {
         id
         name
-        projects {
-          nextToken
-        }
         createdAt
         updatedAt
+        __typename
       }
       createdAt
       updatedAt
       userProjectsId
+      __typename
     }
   }
 `;
@@ -376,15 +293,14 @@ export const onDeleteProject = /* GraphQL */ `
       user {
         id
         name
-        projects {
-          nextToken
-        }
         createdAt
         updatedAt
+        __typename
       }
       createdAt
       updatedAt
       userProjectsId
+      __typename
     }
   }
 `;

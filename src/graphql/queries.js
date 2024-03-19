@@ -7,6 +7,7 @@ export const getBlog = /* GraphQL */ `
       id
       name
       summary
+      imgPath
       posts {
         items {
           id
@@ -17,9 +18,11 @@ export const getBlog = /* GraphQL */ `
           blogPostsId
         }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -34,13 +37,16 @@ export const listBlogs = /* GraphQL */ `
         id
         name
         summary
+        imgPath
         posts {
           nextToken
         }
         createdAt
         updatedAt
+        __typename
       }
       nextToken
+      __typename
     }
   }
 `;
@@ -54,11 +60,13 @@ export const getPost = /* GraphQL */ `
         id
         name
         summary
+        imgPath
         posts {
           nextToken
         }
         createdAt
         updatedAt
+        __typename
       }
       comments {
         items {
@@ -69,10 +77,12 @@ export const getPost = /* GraphQL */ `
           postCommentsId
         }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
       blogPostsId
+      __typename
     }
   }
 `;
@@ -100,8 +110,10 @@ export const listPosts = /* GraphQL */ `
         createdAt
         updatedAt
         blogPostsId
+        __typename
       }
       nextToken
+      __typename
     }
   }
 `;
@@ -126,11 +138,13 @@ export const getComment = /* GraphQL */ `
         createdAt
         updatedAt
         blogPostsId
+        __typename
       }
       content
       createdAt
       updatedAt
       postCommentsId
+      __typename
     }
   }
 `;
@@ -155,8 +169,10 @@ export const listComments = /* GraphQL */ `
         createdAt
         updatedAt
         postCommentsId
+        __typename
       }
       nextToken
+      __typename
     }
   }
 `;
@@ -177,9 +193,11 @@ export const getUser = /* GraphQL */ `
           userProjectsId
         }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -198,8 +216,10 @@ export const listUsers = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        __typename
       }
       nextToken
+      __typename
     }
   }
 `;
@@ -219,10 +239,12 @@ export const getProject = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        __typename
       }
       createdAt
       updatedAt
       userProjectsId
+      __typename
     }
   }
 `;
@@ -248,8 +270,10 @@ export const listProjects = /* GraphQL */ `
         createdAt
         updatedAt
         userProjectsId
+        __typename
       }
       nextToken
+      __typename
     }
   }
 `;

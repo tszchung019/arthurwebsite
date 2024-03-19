@@ -6,6 +6,7 @@ type Blog @model {
   id: ID!
   name: String!
   summary: String
+  imgPath: String
   posts: [Post] @hasMany
 }
 

@@ -10,6 +10,7 @@ export const createBlog = /* GraphQL */ `
       id
       name
       summary
+      imgPath
       posts {
         items {
           id
@@ -20,9 +21,11 @@ export const createBlog = /* GraphQL */ `
           blogPostsId
         }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -35,19 +38,22 @@ export const updateBlog = /* GraphQL */ `
       id
       name
       summary
+      imgPath
       posts {
         items {
-          id
-          title
-          content
-          createdAt
-          updatedAt
-          blogPostsId
-        }
+        id
+        title
+        content
+        createdAt
+        updatedAt
+        blogPostsId
+      }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -60,6 +66,7 @@ export const deleteBlog = /* GraphQL */ `
       id
       name
       summary
+      imgPath
       posts {
         items {
           id
@@ -70,9 +77,11 @@ export const deleteBlog = /* GraphQL */ `
           blogPostsId
         }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -89,11 +98,13 @@ export const createPost = /* GraphQL */ `
         id
         name
         summary
+        imgPath
         posts {
           nextToken
         }
         createdAt
         updatedAt
+        __typename
       }
       comments {
         items {
@@ -104,10 +115,12 @@ export const createPost = /* GraphQL */ `
           postCommentsId
         }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
       blogPostsId
+      __typename
     }
   }
 `;
@@ -124,11 +137,13 @@ export const updatePost = /* GraphQL */ `
         id
         name
         summary
+        imgPath
         posts {
           nextToken
         }
         createdAt
         updatedAt
+        __typename
       }
       comments {
         items {
@@ -139,10 +154,12 @@ export const updatePost = /* GraphQL */ `
           postCommentsId
         }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
       blogPostsId
+      __typename
     }
   }
 `;
@@ -159,11 +176,13 @@ export const deletePost = /* GraphQL */ `
         id
         name
         summary
+        imgPath
         posts {
           nextToken
         }
         createdAt
         updatedAt
+        __typename
       }
       comments {
         items {
@@ -174,10 +193,12 @@ export const deletePost = /* GraphQL */ `
           postCommentsId
         }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
       blogPostsId
+      __typename
     }
   }
 `;
@@ -205,11 +226,13 @@ export const createComment = /* GraphQL */ `
         createdAt
         updatedAt
         blogPostsId
+        __typename
       }
       content
       createdAt
       updatedAt
       postCommentsId
+      __typename
     }
   }
 `;
@@ -237,11 +260,13 @@ export const updateComment = /* GraphQL */ `
         createdAt
         updatedAt
         blogPostsId
+        __typename
       }
       content
       createdAt
       updatedAt
       postCommentsId
+      __typename
     }
   }
 `;
@@ -269,11 +294,13 @@ export const deleteComment = /* GraphQL */ `
         createdAt
         updatedAt
         blogPostsId
+        __typename
       }
       content
       createdAt
       updatedAt
       postCommentsId
+      __typename
     }
   }
 `;
@@ -297,9 +324,11 @@ export const createUser = /* GraphQL */ `
           userProjectsId
         }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -323,9 +352,11 @@ export const updateUser = /* GraphQL */ `
           userProjectsId
         }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -349,9 +380,11 @@ export const deleteUser = /* GraphQL */ `
           userProjectsId
         }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -374,10 +407,12 @@ export const createProject = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        __typename
       }
       createdAt
       updatedAt
       userProjectsId
+      __typename
     }
   }
 `;
@@ -400,10 +435,12 @@ export const updateProject = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        __typename
       }
       createdAt
       updatedAt
       userProjectsId
+      __typename
     }
   }
 `;
@@ -426,10 +463,12 @@ export const deleteProject = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        __typename
       }
       createdAt
       updatedAt
       userProjectsId
+      __typename
     }
   }
 `;
