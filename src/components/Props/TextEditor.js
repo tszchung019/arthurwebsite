@@ -1,11 +1,27 @@
-import React, { useState } from "react";
-import 'quill/dist/quill.snow.css'
-import ReactQuill from 'react-quill'
+import React, { Component } from "react";
+import 'quill/dist/quill.snow.css';
+import ReactQuill, { Quill } from 'react-quill';
+import ImageUploader from "quill-image-uploader";
 
-const TextEditor = ({ onContentChange }) => {
-  const [content, setContent] = useState('');
+Quill.register("modules/imageUploader", ImageUploader);
 
-  var modules = {
+class TextEditor extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      content: ''
+    };
+  }
+
+  handleProcedureContentChange = (content) => {
+    this.setState({ content });
+    const { onContentChange } = this.props;
+    if (typeof onContentChange === 'function') {
+      onContentChange(content);
+    }
+  };
+
+  modules = {
     toolbar: [
       [{ size: ["small", false, "large", "huge"] }],
       ["bold", "italic", "underline", "strike", "blockquote"],
@@ -19,38 +35,61 @@ const TextEditor = ({ onContentChange }) => {
         { align: [] }
       ],
       [{ "color": ["#000000", "#e60000", "#ff9900", "#ffff00", "#008a00", "#0066cc", "#9933ff", "#ffffff", "#facccc", "#ffebcc", "#ffffcc", "#cce8cc", "#cce0f5", "#ebd6ff", "#bbbbbb", "#f06666", "#ffc266", "#ffff66", "#66b966", "#66a3e0", "#c285ff", "#888888", "#a10000", "#b26b00", "#b2b200", "#006100", "#0047b2", "#6b24b2", "#444444", "#5c0000", "#663d00", "#666600", "#003700", "#002966", "#3d1466", 'custom-color'] }],
-    ]
+    ],
+    imageUploader: {
+        upload: (file) => {
+            console.log(file.type);
+          return new Promise((resolve, reject) => {
+            const formData = new FormData();
+            formData.append("image", file);
+      
+            fetch(
+              "https://ktpetp8vld.execute-api.us-east-1.amazonaws.com/prod/imageUploader",
+              {
+                method: "POST",
+                body: formData
+              }
+            )
+            .then((response) => response.json())
+            .then((result) => {
+              console.log(result);
+              resolve(result.imageUrl);
+            })
+            .catch((error) => {
+              reject("Upload failed");
+              console.error("Error:", error);
+            });
+          });
+        }
+      }      
   };
 
-  var formats = [
+  formats = [
     "header", "height", "bold", "italic",
     "underline", "strike", "blockquote",
     "list", "color", "bullet", "indent",
     "link", "image", "align", "size",
   ];
 
-  const handleProcedureContentChange = (content) => {
-    setContent(content); // Update local state with the content
-    if (typeof onContentChange === 'function') {
-      onContentChange(content); // Invoke the callback function with the content
-    }
-  };
+  render() {
+    const { content } = this.state;
 
-  return (
-    <div>
-      <div style={{ display: "grid"}}>
-        <ReactQuill
-          theme="snow"
-          modules={modules}
-          formats={formats}
-          placeholder="write your content ...."
-          onChange={handleProcedureContentChange}
-          style={{ height: "20em"}}
-          value={content} // Set the value of the Quill editor to the local state
-        />
+    return (
+      <div>
+        <div style={{ display: "grid"}}>
+          <ReactQuill
+            theme="snow"
+            modules={this.modules}
+            formats={this.formats}
+            placeholder="write your content ...."
+            onChange={this.handleProcedureContentChange}
+            style={{ height: `calc(100vh - 250px)` }}
+            value={content}
+          />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default TextEditor;
