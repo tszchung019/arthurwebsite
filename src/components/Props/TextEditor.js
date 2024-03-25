@@ -38,7 +38,6 @@ class TextEditor extends Component {
     ],
     imageUploader: {
         upload: (file) => {
-            console.log(file.type);
           return new Promise((resolve, reject) => {
             const formData = new FormData();
             formData.append("image", file);
@@ -47,7 +46,10 @@ class TextEditor extends Component {
               "https://ktpetp8vld.execute-api.us-east-1.amazonaws.com/prod/imageUploader",
               {
                 method: "POST",
-                body: formData
+                body: formData,
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
               }
             )
             .then((response) => response.json())
@@ -61,7 +63,7 @@ class TextEditor extends Component {
             });
           });
         }
-      }      
+      }
   };
 
   formats = [

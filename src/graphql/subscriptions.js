@@ -144,6 +144,10 @@ export const onCreateComment = /* GraphQL */ `
         __typename
       }
       content
+      replys {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       postCommentsId
@@ -165,6 +169,10 @@ export const onUpdateComment = /* GraphQL */ `
         __typename
       }
       content
+      replys {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       postCommentsId
@@ -186,9 +194,73 @@ export const onDeleteComment = /* GraphQL */ `
         __typename
       }
       content
+      replys {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       postCommentsId
+      __typename
+    }
+  }
+`;
+export const onCreateReply = /* GraphQL */ `
+  subscription OnCreateReply($filter: ModelSubscriptionReplyFilterInput) {
+    onCreateReply(filter: $filter) {
+      id
+      comment {
+        id
+        content
+        createdAt
+        updatedAt
+        postCommentsId
+        __typename
+      }
+      content
+      createdAt
+      updatedAt
+      commentReplysId
+      __typename
+    }
+  }
+`;
+export const onUpdateReply = /* GraphQL */ `
+  subscription OnUpdateReply($filter: ModelSubscriptionReplyFilterInput) {
+    onUpdateReply(filter: $filter) {
+      id
+      comment {
+        id
+        content
+        createdAt
+        updatedAt
+        postCommentsId
+        __typename
+      }
+      content
+      createdAt
+      updatedAt
+      commentReplysId
+      __typename
+    }
+  }
+`;
+export const onDeleteReply = /* GraphQL */ `
+  subscription OnDeleteReply($filter: ModelSubscriptionReplyFilterInput) {
+    onDeleteReply(filter: $filter) {
+      id
+      comment {
+        id
+        content
+        createdAt
+        updatedAt
+        postCommentsId
+        __typename
+      }
+      content
+      createdAt
+      updatedAt
+      commentReplysId
       __typename
     }
   }

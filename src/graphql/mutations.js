@@ -68,7 +68,7 @@ export const deleteBlog = /* GraphQL */ `
       summary
       imgPath
       posts {
-        items {
+items {
           id
           title
           content
@@ -99,7 +99,7 @@ export const createPost = /* GraphQL */ `
         name
         summary
         imgPath
-        posts {
+posts {
           nextToken
         }
         createdAt
@@ -107,7 +107,7 @@ export const createPost = /* GraphQL */ `
         __typename
       }
       comments {
-        items {
+items {
           id
           content
           createdAt
@@ -138,7 +138,7 @@ export const updatePost = /* GraphQL */ `
         name
         summary
         imgPath
-        posts {
+posts {
           nextToken
         }
         createdAt
@@ -146,7 +146,7 @@ export const updatePost = /* GraphQL */ `
         __typename
       }
       comments {
-        items {
+items {
           id
           content
           createdAt
@@ -229,6 +229,10 @@ export const createComment = /* GraphQL */ `
         __typename
       }
       content
+      replys {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       postCommentsId
@@ -263,6 +267,10 @@ export const updateComment = /* GraphQL */ `
         __typename
       }
       content
+      replys {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       postCommentsId
@@ -297,9 +305,82 @@ export const deleteComment = /* GraphQL */ `
         __typename
       }
       content
+      replys {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       postCommentsId
+      __typename
+    }
+  }
+`;
+export const createReply = /* GraphQL */ `
+  mutation CreateReply(
+    $input: CreateReplyInput!
+    $condition: ModelReplyConditionInput
+  ) {
+    createReply(input: $input, condition: $condition) {
+      id
+      comment {
+        id
+        content
+        createdAt
+        updatedAt
+        postCommentsId
+        __typename
+      }
+      content
+      createdAt
+      updatedAt
+      commentReplysId
+      __typename
+    }
+  }
+`;
+export const updateReply = /* GraphQL */ `
+  mutation UpdateReply(
+    $input: UpdateReplyInput!
+    $condition: ModelReplyConditionInput
+  ) {
+    updateReply(input: $input, condition: $condition) {
+      id
+      comment {
+        id
+        content
+        createdAt
+        updatedAt
+        postCommentsId
+        __typename
+      }
+      content
+      createdAt
+      updatedAt
+      commentReplysId
+      __typename
+    }
+  }
+`;
+export const deleteReply = /* GraphQL */ `
+  mutation DeleteReply(
+    $input: DeleteReplyInput!
+    $condition: ModelReplyConditionInput
+  ) {
+    deleteReply(input: $input, condition: $condition) {
+      id
+      comment {
+        id
+        content
+        createdAt
+        updatedAt
+        postCommentsId
+        __typename
+      }
+      content
+      createdAt
+      updatedAt
+      commentReplysId
       __typename
     }
   }

@@ -141,6 +141,10 @@ export const getComment = /* GraphQL */ `
         __typename
       }
       content
+      replys {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       postCommentsId
@@ -169,6 +173,46 @@ export const listComments = /* GraphQL */ `
         createdAt
         updatedAt
         postCommentsId
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const getReply = /* GraphQL */ `
+  query GetReply($id: ID!) {
+    getReply(id: $id) {
+      id
+      comment {
+        id
+        content
+        createdAt
+        updatedAt
+        postCommentsId
+        __typename
+      }
+      content
+      createdAt
+      updatedAt
+      commentReplysId
+      __typename
+    }
+  }
+`;
+export const listReplies = /* GraphQL */ `
+  query ListReplies(
+    $filter: ModelReplyFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listReplies(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        content
+        createdAt
+        updatedAt
+        commentReplysId
         __typename
       }
       nextToken
