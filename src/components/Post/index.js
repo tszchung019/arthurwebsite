@@ -16,6 +16,7 @@ import {
     createComment as createCommentMutation,
     updateComment as updateCommentMutation,
     deleteComment as deleteCommentMutation,
+    createReply as createReplyMutation,
   } from "../../graphql/mutations"
 import DrawerComponent from '../Drawer';
 import Navbar from '../Navbar';
@@ -30,6 +31,7 @@ import { NavLink, useParams } from "react-router-dom";
 import Paper from '@mui/material/Paper';
 import { Translate } from "@mui/icons-material";
 import TextEditor from "../Props/TextEditor";
+import ReplyComponent from "../Props/ReplyComponent"; 
 
 const Post = () => {
     const theme = useTheme();
@@ -38,6 +40,12 @@ const Post = () => {
     const [post, setPost] = useState([]);
     const [comments, setComments] = useState([]);
     const [commentContent, setCommentContent] = useState('');
+    const [replyContent, setReplyContent] = useState('');
+    const [activeReplyId, setActiveReplyId] = useState(null);
+
+    const toggleReply = (commentId) => {
+        setActiveReplyId(activeReplyId === commentId ? null : commentId);
+    };
 
     useEffect(() => {
         getContentfromPost({id});
@@ -76,6 +84,25 @@ const Post = () => {
         });
     }
 
+    async function handlePostReply() {
+        await createReply({id, content: commentContent});
+        // Clear comment content after posting
+        setCommentContent('');
+        // Refresh comments
+        getContentfromPost({ id });
+    }
+
+    async function createReply({id, content}) {
+        const data = {
+        commentReplysId: id,
+        content: content,
+        };
+        await API.graphql({
+        query: createReplyMutation,
+        variables: { input: data },
+        });
+    }
+
     return (
         <body>
             <div>
@@ -102,7 +129,7 @@ const Post = () => {
                             </section>
                             {comments.length > 0 ? (
                             comments.map((comment, index) => (
-                                <Paper className="comment-box" style={{ backgroundColor: "#f0f0f0", padding: "10px", borderRadius: "8px", marginBottom: "10px" }}>
+                                <Paper key={index} className="comment-box" style={{ backgroundColor: "#f0f0f0", padding: "10px", borderRadius: "8px", marginBottom: "10px" }}>
                                     <div style={{ display: "flex", alignItems: "center", marginBottom: "5px" }}>
                                         <img src={comment.avatar} alt="Avatar" style={{ width: "40px", height: "40px", borderRadius: "50%", marginRight: "10px" }} />
                                         <div>
@@ -110,7 +137,11 @@ const Post = () => {
                                             <span style={{ fontSize: "12px", color: "#777", marginLeft: "5px" }}>{comment.timestamp}</span>
                                         </div>
                                     </div>
-                                    <div dangerouslySetInnerHTML={{ __html: comment.content }} />
+                                    <Paper>
+                                        <div dangerouslySetInnerHTML={{ __html: comment.content }} />
+                                    </Paper>
+                                    {activeReplyId !== comment.id && <button onClick={() => toggleReply(comment.id)}>Reply</button>}
+                                    {activeReplyId === comment.id && <ReplyComponent onSubmit={(content) => handlePostReply(comment.id, content)} />}
                                 </Paper>
                             ))
                             ) : (
