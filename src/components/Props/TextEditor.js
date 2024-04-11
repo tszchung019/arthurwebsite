@@ -3,7 +3,7 @@ import 'quill/dist/quill.snow.css';
 import ReactQuill, { Quill } from 'react-quill';
 import ImageUploader from "quill-image-uploader";
 
-const url = process.env.REACT_APP_API_ENDPOINT;
+const url = process.env.REACT_APP_IMAGE_UPLOAD;
 
 Quill.register("modules/imageUploader", ImageUploader);
 
