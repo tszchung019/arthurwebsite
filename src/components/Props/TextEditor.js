@@ -3,6 +3,8 @@ import 'quill/dist/quill.snow.css';
 import ReactQuill, { Quill } from 'react-quill';
 import ImageUploader from "quill-image-uploader";
 
+const url = process.env.REACT_APP_API_ENDPOINT;
+
 Quill.register("modules/imageUploader", ImageUploader);
 
 class TextEditor extends Component {
@@ -43,7 +45,7 @@ class TextEditor extends Component {
             formData.append("image", file);
       
             fetch(
-              "https://4of9za0e63.execute-api.us-east-1.amazonaws.com/prod/imageUploaderV2",
+              url,
               {
                 method: "POST",
                 body: formData,
