@@ -230,7 +230,7 @@ export default function ManageBlogs() {
     };
 
   return (
-      <body>
+      <div>
       <div>
           <View className="Blog">
               <Heading level={3}>Create New Blog</Heading>
@@ -278,6 +278,6 @@ export default function ManageBlogs() {
               </Paper>
           </View>
       </div>
-      </body>
+      </div>
   );
 }

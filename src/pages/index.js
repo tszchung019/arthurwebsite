@@ -11,7 +11,7 @@ const Home = () => {
 	const theme = useTheme();
 	const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 	return (
-		<body>
+		<div>
 			<div>
 				{isMobile ? (
 					<DrawerComponent />
@@ -19,7 +19,7 @@ const Home = () => {
 					<Navbar />
 				)}
 			</div>
-			<div class="content">
+			<div className="content">
 				<section>
 					<h2>Welcome to my website</h2>
 					<p>Did you know that, according to a recent study by McKinsey Global Institute, nearly 50% of our daily work can be automated by currently available technologies in 2030? This means millions of people worldwide may need to consider upskilling or changing occupations to stay competitive in the market.</p>
@@ -33,7 +33,7 @@ const Home = () => {
 					<p>Working as a freelancer, I am eager to work on projects in web development, data analysis, and machine learning. If you are interested, sign up and have a chat with me! I am very happy to discuss with you further!</p>
 				</section>
 			</div>
-		</body>
+		</div>
 	);
 };
 

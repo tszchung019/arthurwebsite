@@ -11,7 +11,7 @@ const About = () => {
 	const theme = useTheme();
 	const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 	return (
-		<body>
+		<div>
 			<div>
 				{isMobile ? (
 					<DrawerComponent />
@@ -19,7 +19,7 @@ const About = () => {
 					<Navbar />
 				)}
 			</div>
-			<div class="content">
+			<div className="content">
 				<h1>About Me</h1>
 				<p>
 					As a graduate of Hong Kong University of Science and Technology, I honed my skills as a software solution developer at one of Hong Kong's largest IT services providers. Since relocating to the United Kingdom, I have been freelancing and specializing in web development, machine learning, and data science. With proficiency in multiple programming languages, I have created diverse applications, including Content Management Systems and contextual chatbots.
@@ -34,7 +34,7 @@ const About = () => {
 					Currently, I am actively seeking opportunities to collaborate with like-minded individuals who share my vision. I believe that together, we can contribute to a more beautiful world through our collective knowledge and efforts. Thank you for your time, and I look forward to connecting with all of you.
 				</p>
 			</div>
-		</body>
+		</div>
 	);
 };
 

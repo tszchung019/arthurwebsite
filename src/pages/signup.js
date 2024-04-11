@@ -14,13 +14,13 @@ Amplify.configure(awsExports);
 
 export default function SignUp() {
   return (
-    <body>
+    <div>
       <NavLink className={'homeIcon'} to={"/"}><HomeIcon /></NavLink>
       <Authenticator>
         {({ signOut, user }) => (
           <main>
             <Button variant="text" sx={{position: 'absolute', top: '5px', right: '10px'}} onClick={signOut}>Sign out</Button>
-            <div class="content">
+            <div className="content">
               {user.getSignInUserSession().getAccessToken().payload['cognito:groups']=='Admin'? (
                 <div>
                   <section>
@@ -43,6 +43,6 @@ export default function SignUp() {
           </main>
         )}
       </Authenticator>
-    </body>
+    </div>
   );
 }

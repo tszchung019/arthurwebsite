@@ -43,16 +43,19 @@ class TextEditor extends Component {
             formData.append("image", file);
       
             fetch(
-              "https://ktpetp8vld.execute-api.us-east-1.amazonaws.com/prod/imageUploader",
+              "https://4of9za0e63.execute-api.us-east-1.amazonaws.com/prod/imageUploaderV2",
               {
                 method: "POST",
                 body: formData,
-                headers: {
-                    "Content-Type": "multipart/form-data"
-                }
               }
             )
-            .then((response) => response.json())
+            .then((response) => {
+              if (response.ok) {
+                return response.json();
+              } else {
+                throw new Error('Request failed with status ' + response.status);
+              }
+            })
             .then((result) => {
               console.log(result);
               resolve(result.imageUrl);

@@ -16,12 +16,12 @@ const Navbar = () => {
 				<>
 				<Bars />
 				<NavMenu>
-					<NavLink to='/' activeStyle>Home</NavLink>
-					<NavLink to='/about' activeStyle>About</NavLink>
-					<NavLink to='/events' activeStyle>Events</NavLink>
-					<NavLink to='/projects' activeStyle>My Projects</NavLink>
-					<NavLink to='/work' activeStyle>Services</NavLink>
-					<NavLink to='/blogs' activeStyle>Blogs</NavLink>
+					<NavLink to='/' >Home</NavLink>
+					<NavLink to='/about' >About</NavLink>
+					<NavLink to='/events' >Events</NavLink>
+					<NavLink to='/projects' >My Projects</NavLink>
+					<NavLink to='/work' >Services</NavLink>
+					<NavLink to='/blogs' >Blogs</NavLink>
 					{/* Second Nav */}
 					{/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
 				</NavMenu>

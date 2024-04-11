@@ -11,7 +11,7 @@ const Work = () => {
 	const theme = useTheme();
 	const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 	return (
-		<body>
+		<div>
 			<div>
 				{isMobile ? (
 					<DrawerComponent />
@@ -19,11 +19,11 @@ const Work = () => {
 					<Navbar />
 				)}
 			</div>
-			<div class="content">
+			<div className="content">
 				<h1>Services</h1>
 				<p>Under Construction...</p>
 			</div>
-		</body>
+		</div>
 	);
 };
 

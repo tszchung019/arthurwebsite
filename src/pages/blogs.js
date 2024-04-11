@@ -94,7 +94,7 @@ const Blogs = () => {
   }
 
   return (
-    <body>
+    <div>
     <div>
       {isMobile ? (
         <DrawerComponent />
@@ -102,7 +102,7 @@ const Blogs = () => {
         <Navbar />
       )}
     </div>
-      <div class="content">
+      <div className="content">
         <h1>Welcome to Arthur's Blogs</h1>
         <View className="Blog">
           <Heading level={2}>Current Blogs</Heading>
@@ -138,7 +138,7 @@ const Blogs = () => {
           </Grid>
         </View>
       </div>
-      </body>
+      </div>
   );
 };
 
