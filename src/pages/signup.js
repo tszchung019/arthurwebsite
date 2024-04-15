@@ -1,6 +1,6 @@
 import React from 'react';
 import { Amplify } from 'aws-amplify';
-import { Authenticator, Heading } from '@aws-amplify/ui-react';
+import { Authenticator, Heading, Text } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import awsExports from '../aws-exports.js';
 import BasicTabs from '../components/UserPortal.js';
@@ -24,7 +24,7 @@ export default function SignUp() {
               {user.getSignInUserSession().getAccessToken().payload['cognito:groups']=='Admin'? (
                 <div>
                   <section>
-                    <Heading level={2}>Welcome, administrator {user.username}!</Heading>
+                    <Text>Welcome, administrator {user.username}!</Text>
                   </section>
                   <Admin />
                 </div>
@@ -34,11 +34,13 @@ export default function SignUp() {
                   <p>This is your portal for managing your projects with me. You can start a new project, ask for a quote, and manage the work schedule with existing projects</p>
                 </section>
               )}
-              <section id='userPortal'>
-                <BasicTabs
-                  user={user.username}
-                />
-              </section>
+              <div className="project-section">
+                <section id='userPortal'>
+                  <BasicTabs
+                    user={user.username}
+                  />
+                </section>
+              </div>
             </div>
           </main>
         )}

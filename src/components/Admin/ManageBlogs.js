@@ -53,6 +53,7 @@ export default function ManageBlogs() {
   const [blogs, setBlogs] = useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [expandedRowId, setExpandedRowId] = useState(null);
 
   useEffect(() => {
       fetchBlogs();
@@ -98,18 +99,21 @@ export default function ManageBlogs() {
 
   //Table Properties
 
-  function Row(props) {
-      const { row } = props;
-      const [open, setOpen] = React.useState(false);
+  function Row({ row, expanded, setExpandedRowId }) {
+      const [open, setOpen] = React.useState(expanded);
       const [posts, setPosts] = useState([]);
 
-      async function getPostsfromBlog({ id }) {
-          const apiData = await API.graphql({
-            query: getBlogQuery,
-            variables: { id: id },
-          });
-          const postsFromAPI = apiData.data.getBlog.posts.items;
-          setPosts(postsFromAPI);
+      useEffect(() => {
+        getPostsfromBlog(row.id);
+      }, []);
+
+      async function getPostsfromBlog(id) {
+        const apiData = await API.graphql({
+          query: getBlogQuery,
+          variables: { id: id },
+        });
+        const postsFromAPI = apiData.data.getBlog.posts.items;
+        setPosts(postsFromAPI);
       }
 
       async function deletePost({ id }) {
@@ -137,16 +141,17 @@ export default function ManageBlogs() {
         <React.Fragment>
           <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
             <TableCell>
-              <IconButton
-                aria-label="expand row"
-                size="small"
-                onClick={() => {
-                  getPostsfromBlog(row);
-                  setOpen(!open);
-                }}
-              >
-                {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-              </IconButton>
+            <IconButton
+              aria-label="expand row"
+              size="small"
+              onClick={() => {
+                getPostsfromBlog(row.id);
+                setExpandedRowId(row.id);
+                setOpen(!open);
+              }}
+            >
+              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </IconButton>
             </TableCell>
             <TableCell component="th" scope="row" align="center">
               {row.name}
@@ -225,8 +230,10 @@ export default function ManageBlogs() {
             name: PropTypes.number.isRequired,
             updatedAt: PropTypes.string.isRequired,
           }),
-        ).isRequired,
+        ),
       }).isRequired,
+      expanded: PropTypes.bool.isRequired,
+      setExpandedRowId: PropTypes.func.isRequired,
     };
 
   return (
@@ -261,7 +268,12 @@ export default function ManageBlogs() {
                       </TableHead>
                       <TableBody>
                           {blogs.map((blog) => (
-                              <Row key={blog.id || blog.name} row={blog} />
+                              <Row 
+                                key={blog.id || blog.name} 
+                                row={blog} 
+                                expanded={expandedRowId === blog.id} 
+                                setExpandedRowId={setExpandedRowId} 
+                              />
                           ))}
                       </TableBody>
                   </Table>
