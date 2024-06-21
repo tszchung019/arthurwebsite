@@ -26,7 +26,7 @@ const Navbar = () => {
 					{/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
 				</NavMenu>
 				<NavBtn>
-					<NavBtnLink to='/signup'>Sign Up / Log In</NavBtnLink>
+					<NavBtnLink to='/signup'>Subscribe</NavBtnLink>
 				</NavBtn>
 				</>
 			}

@@ -6,6 +6,9 @@ import {
 	useTheme,
 	useMediaQuery
 } from "@mui/material";
+import { IconButton } from '@mui/material';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 const About = () => {
 	const theme = useTheme();
@@ -21,6 +24,12 @@ const About = () => {
 			</div>
 			<div className="content">
 				<h1>About Me</h1>
+				<IconButton href="https://www.linkedin.com/in/tsz-chung-chan-59964616b" target="_blank">
+					<LinkedInIcon className="muiIcon"/>
+				</IconButton>
+				<IconButton href="https://github.com/tszchung019" target="_blank">
+					<GitHubIcon className="muiIcon"/>
+				</IconButton>
 				<p>
 					As a graduate of Hong Kong University of Science and Technology, I honed my skills as a software solution developer at one of Hong Kong's largest IT services providers. Since relocating to the United Kingdom, I have been freelancing and specializing in web development, machine learning, and data science. With proficiency in multiple programming languages, I have created diverse applications, including Content Management Systems and contextual chatbots.
 				</p>

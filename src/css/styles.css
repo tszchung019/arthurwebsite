@@ -22,6 +22,10 @@ p {
     color: #000639;
 }
 
+.muiIcon {
+    color: #000639;
+}
+
 .navbar {
     display: flex;
 }
@@ -79,7 +83,7 @@ p {
     align-items: center;
     font-size: large;
     line-height: normal;
-    background-color: aquamarine;
+    background-color: #b7efea;
 }
 
 .blogBox-summary {
@@ -136,6 +140,11 @@ img {
     left:0;
     right:0;
     padding: 0 20px;
+    background-color: #b7efea;
+}
+
+#post-return {
+    float: right;
 }
 
 .comment-section {

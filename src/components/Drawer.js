@@ -27,7 +27,7 @@ return (
         onClose={() => setOpenDrawer(false)}
         PaperProps={{
             sx: {
-              backgroundColor: "#045572",
+              backgroundColor: "#02c2bb",
               width: "250px"
             },
           }}
@@ -72,7 +72,7 @@ return (
         <ListItem id="signupButton" onClick={() => setOpenDrawer(false)}>
             <PeopleIcon className="navBarIcon"/>
             <ListItemButton>
-            <Link className="navBarButton" to="/signup">Sign Up / Log In</Link>
+            <Link className="navBarButton" to="/signup">Subscribe</Link>
             </ListItemButton>
         </ListItem>
         </List>

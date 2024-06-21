@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import ListIcon from '@mui/icons-material/List';
 import { API } from "aws-amplify";
 import {
     Heading,
@@ -113,15 +115,15 @@ const Post = () => {
 				)}
 			</div>
             <View class="content">
-                <Paper className="post-content is-scrollLocked is-momentumScrollable">
-                    <section>
-                        <Heading level={2}>{post.title}</Heading>
-                    </section>
-                    <section>
-                        <div dangerouslySetInnerHTML={{ __html: post.content }} />
-                    </section>
+                <Paper square className="post-content is-scrollLocked is-momentumScrollable"
+                    sx={{backgroundColor: "#a1f0e0"}}
+                >
+                    <Heading level={2}>{post.title}</Heading>
                 </Paper>
-                <Paper className="is-scrollLocked is-momentumScrollable">
+                <Paper square className="post-content is-scrollLocked is-momentumScrollable">
+                    <div dangerouslySetInnerHTML={{ __html: post.content }} />
+                </Paper>
+                <Paper square className="is-scrollLocked is-momentumScrollable">
                     <Box>
                         <Box className="comment-section">
                             <section>
@@ -156,7 +158,11 @@ const Post = () => {
                         </section>
                     </Box>
                 </Paper>
-                <NavLink to={'/blogs'}>Return to Blog</NavLink>
+                <div id="post-return">
+                    <IconButton href="../blogs">
+                        <ListIcon className="muiIcon"/>
+                    </IconButton>
+                </div>
             </View>
         </body>
     );

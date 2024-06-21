@@ -3,7 +3,7 @@ import { NavLink as Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Nav = styled.nav`
-background: linear-gradient(225deg, #74EBD5 0%, #62BCD6 100%);
+background: linear-gradient(225deg, #B9D5E0 0%, #B7E6E2 100%);
 height: 85px;
 display: flex;
 justify-content: space-between;
@@ -84,7 +84,7 @@ text-decoration: none;
 margin-left: 24px;
 &:hover {
 	transition: all 0.2s ease-in-out;
-	background: #17cf97;
+	background: #76e8c5;
 	color: #02144d;
 }
 `;

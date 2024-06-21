@@ -42,7 +42,7 @@ function App() {
 					   "color":{
 						  "value":"#567698"
 					   },
-					   "image":"linear-gradient(0deg, #08AEEA 0%, #2AF598 100%)",
+					   "image":"linear-gradient(0deg, #CDFFD8 0%, #94B9FF 100%)",
 					   "position":"",
 					   "repeat":"",
 					   "size":"",
@@ -449,7 +449,7 @@ function App() {
 		<Route path='/blogs/:id' element={<BlogPost/>} />
 		<Route path='/posts/:id' element={<Post/>} />
         <Route path="/signup" element={<SignUp/>} />
-		<Route path="/admin" element={<Admin />} />
+		<Route path="/admin" element={<Admin/>} />
       </Routes>
     </Router>
   );

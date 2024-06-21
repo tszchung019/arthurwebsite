@@ -105,7 +105,7 @@ const Blogs = () => {
       <div className="content">
         <h1>Welcome to Arthur's Blogs</h1>
         <View className="Blog">
-          <Heading level={2}>Current Blogs</Heading>
+          <Heading level={2}>Categories</Heading>
           <Grid item xs={6}>
             <Box
               sx={{

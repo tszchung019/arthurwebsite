@@ -7,7 +7,6 @@ import BasicTabs from '../components/UserPortal.js';
 import { NavLink } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import '../css/styles.css';
-import Admin from '../components/Admin/index.js';
 import { Button } from '@mui/material';
 
 Amplify.configure(awsExports);
@@ -21,19 +20,11 @@ export default function SignUp() {
           <main>
             <Button variant="text" sx={{position: 'absolute', top: '5px', right: '10px'}} onClick={signOut}>Sign out</Button>
             <div className="content">
-              {user.getSignInUserSession().getAccessToken().payload['cognito:groups']=='Admin'? (
-                <div>
-                  <section>
-                    <Text>Welcome, administrator {user.username}!</Text>
-                  </section>
-                  <Admin />
-                </div>
-              ) : (
-                <section>
-                  <h1>Hello {user.username}</h1>
-                  <p>This is your portal for managing your projects with me. You can start a new project, ask for a quote, and manage the work schedule with existing projects</p>
-                </section>
-              )}
+              <section>
+                <h1>Hello {user.username}</h1>
+                <p>This is your portal for managing your projects with me. You can start a new project, ask for a quote, and manage the work schedule with existing projects</p>
+              </section>
+              
               <div className="project-section">
                 <section id='userPortal'>
                   <BasicTabs
