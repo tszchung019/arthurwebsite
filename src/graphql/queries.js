@@ -145,9 +145,18 @@ export const getComment = /* GraphQL */ `
         nextToken
         __typename
       }
+      user {
+        id
+        name
+        avatar
+        createdAt
+        updatedAt
+        __typename
+      }
       createdAt
       updatedAt
       postCommentsId
+      userCommentsId
       __typename
     }
   }
@@ -173,6 +182,7 @@ export const listComments = /* GraphQL */ `
         createdAt
         updatedAt
         postCommentsId
+        userCommentsId
         __typename
       }
       nextToken
@@ -190,12 +200,22 @@ export const getReply = /* GraphQL */ `
         createdAt
         updatedAt
         postCommentsId
+        userCommentsId
         __typename
       }
       content
+      user {
+        id
+        name
+        avatar
+        createdAt
+        updatedAt
+        __typename
+      }
       createdAt
       updatedAt
       commentReplysId
+      userReplysId
       __typename
     }
   }
@@ -213,6 +233,7 @@ export const listReplies = /* GraphQL */ `
         createdAt
         updatedAt
         commentReplysId
+        userReplysId
         __typename
       }
       nextToken
@@ -225,6 +246,7 @@ export const getUser = /* GraphQL */ `
     getUser(id: $id) {
       id
       name
+      avatar
       projects {
         items {
           id
@@ -236,6 +258,14 @@ export const getUser = /* GraphQL */ `
           updatedAt
           userProjectsId
         }
+        nextToken
+        __typename
+      }
+      comments {
+        nextToken
+        __typename
+      }
+      replys {
         nextToken
         __typename
       }
@@ -255,6 +285,7 @@ export const listUsers = /* GraphQL */ `
       items {
         id
         name
+        avatar
         projects {
           nextToken
         }
@@ -278,6 +309,7 @@ export const getProject = /* GraphQL */ `
       user {
         id
         name
+        avatar
         projects {
           nextToken
         }

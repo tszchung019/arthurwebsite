@@ -28,7 +28,7 @@ createComment as createCommentMutation,
 updateComment as updateCommentMutation,
 deleteComment as deleteCommentMutation,
 } from "../../graphql/mutations"
-import { NavLink, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import DrawerComponent from '../Drawer';
 import Navbar from '../Navbar';
 import {
@@ -101,7 +101,6 @@ const BlogPost = () => {
 				)}
 			</div>
             <View class="content">
-                <NavLink to='/blogs'>Return to blog</NavLink>
                 <Heading level={2}>Posts</Heading>
                 <Paper sx={{ 'margin-top': '2%', width: '100%', overflow: 'hidden' }}>
                     <TableContainer sx={{ maxHeight: 440 }}>

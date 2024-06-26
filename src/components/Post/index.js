@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
 import ListIcon from '@mui/icons-material/List';
 import { API } from "aws-amplify";
 import {
@@ -114,7 +113,7 @@ const Post = () => {
 					<Navbar />
 				)}
 			</div>
-            <View class="content">
+            <View className="container">
                 <Paper square className="post-content is-scrollLocked is-momentumScrollable"
                     sx={{backgroundColor: "#a1f0e0"}}
                 >
@@ -131,7 +130,7 @@ const Post = () => {
                             </section>
                             {comments.length > 0 ? (
                             comments.map((comment, index) => (
-                                <Paper key={index} className="comment-box" style={{ backgroundColor: "#f0f0f0", padding: "10px", borderRadius: "8px", marginBottom: "10px" }}>
+                                <Paper square key={index} className="comment-box" style={{ backgroundColor: "#f0f0f0", padding: "10px", marginBottom: "10px" }}>
                                     <div style={{ display: "flex", alignItems: "center", marginBottom: "5px" }}>
                                         <img src={comment.avatar} alt="Avatar" style={{ width: "40px", height: "40px", borderRadius: "50%", marginRight: "10px" }} />
                                         <div>

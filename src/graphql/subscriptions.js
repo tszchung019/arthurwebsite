@@ -148,9 +148,18 @@ export const onCreateComment = /* GraphQL */ `
         nextToken
         __typename
       }
+      user {
+        id
+        name
+        avatar
+        createdAt
+        updatedAt
+        __typename
+      }
       createdAt
       updatedAt
       postCommentsId
+      userCommentsId
       __typename
     }
   }
@@ -173,9 +182,18 @@ export const onUpdateComment = /* GraphQL */ `
         nextToken
         __typename
       }
+      user {
+        id
+        name
+        avatar
+        createdAt
+        updatedAt
+        __typename
+      }
       createdAt
       updatedAt
       postCommentsId
+      userCommentsId
       __typename
     }
   }
@@ -198,9 +216,18 @@ export const onDeleteComment = /* GraphQL */ `
         nextToken
         __typename
       }
+      user {
+        id
+        name
+        avatar
+        createdAt
+        updatedAt
+        __typename
+      }
       createdAt
       updatedAt
       postCommentsId
+      userCommentsId
       __typename
     }
   }
@@ -215,12 +242,22 @@ export const onCreateReply = /* GraphQL */ `
         createdAt
         updatedAt
         postCommentsId
+        userCommentsId
         __typename
       }
       content
+      user {
+        id
+        name
+        avatar
+        createdAt
+        updatedAt
+        __typename
+      }
       createdAt
       updatedAt
       commentReplysId
+      userReplysId
       __typename
     }
   }
@@ -235,12 +272,22 @@ export const onUpdateReply = /* GraphQL */ `
         createdAt
         updatedAt
         postCommentsId
+        userCommentsId
         __typename
       }
       content
+      user {
+        id
+        name
+        avatar
+        createdAt
+        updatedAt
+        __typename
+      }
       createdAt
       updatedAt
       commentReplysId
+      userReplysId
       __typename
     }
   }
@@ -255,12 +302,22 @@ export const onDeleteReply = /* GraphQL */ `
         createdAt
         updatedAt
         postCommentsId
+        userCommentsId
         __typename
       }
       content
+      user {
+        id
+        name
+        avatar
+        createdAt
+        updatedAt
+        __typename
+      }
       createdAt
       updatedAt
       commentReplysId
+      userReplysId
       __typename
     }
   }
@@ -270,7 +327,16 @@ export const onCreateUser = /* GraphQL */ `
     onCreateUser(filter: $filter) {
       id
       name
+      avatar
       projects {
+        nextToken
+        __typename
+      }
+      comments {
+        nextToken
+        __typename
+      }
+      replys {
         nextToken
         __typename
       }
@@ -285,7 +351,16 @@ export const onUpdateUser = /* GraphQL */ `
     onUpdateUser(filter: $filter) {
       id
       name
+      avatar
       projects {
+        nextToken
+        __typename
+      }
+      comments {
+        nextToken
+        __typename
+      }
+      replys {
         nextToken
         __typename
       }
@@ -300,7 +375,16 @@ export const onDeleteUser = /* GraphQL */ `
     onDeleteUser(filter: $filter) {
       id
       name
+      avatar
       projects {
+        nextToken
+        __typename
+      }
+      comments {
+        nextToken
+        __typename
+      }
+      replys {
         nextToken
         __typename
       }
@@ -321,6 +405,7 @@ export const onCreateProject = /* GraphQL */ `
       user {
         id
         name
+        avatar
         createdAt
         updatedAt
         __typename
@@ -343,6 +428,7 @@ export const onUpdateProject = /* GraphQL */ `
       user {
         id
         name
+        avatar
         createdAt
         updatedAt
         __typename
@@ -365,6 +451,7 @@ export const onDeleteProject = /* GraphQL */ `
       user {
         id
         name
+        avatar
         createdAt
         updatedAt
         __typename

@@ -2,6 +2,7 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import ListItemText from '@mui/material/ListItemText';
+import PostAddIcon from '@mui/icons-material/PostAdd';
 import ListItem from '@mui/material/ListItem';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
@@ -44,9 +45,9 @@ export default function CreateContent({callback}) {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen} style={{ fontSize: '0.8rem' }}>
-        Create Post
-      </Button>
+      <IconButton onClick={handleClickOpen}>
+        <PostAddIcon/>
+      </IconButton>
       <Dialog
         fullScreen
         open={open}
@@ -74,7 +75,7 @@ export default function CreateContent({callback}) {
             </Button>
           </Toolbar>
         </AppBar>
-        <List>
+        <List sx={{ height: '90vh' }}>
           <ListItem>
             <TextField
                 id="title"
@@ -86,7 +87,7 @@ export default function CreateContent({callback}) {
             />
           </ListItem>
           <Divider />
-          <ListItem sx={{ width: '100%' }}>
+          <ListItem sx={{ height: '65%' }}>
             <TextEditor onContentChange={handleContentChange}/>
           </ListItem>
         </List>

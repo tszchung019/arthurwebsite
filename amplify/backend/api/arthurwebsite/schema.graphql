@@ -23,18 +23,23 @@ type Comment @model {
   post: Post @belongsTo
   content: String!
   replys: [Reply] @hasMany
+  user: User @belongsTo
 }
 
 type Reply @model {
   id: ID!
   comment: Comment @belongsTo
   content: String!
+  user: User @belongsTo
 }
 
 type User @model {
   id: ID!
   name: String!
+  avatar: String
   projects: [Project] @hasMany
+  comments: [Comment] @hasMany
+  replys: [Reply] @hasMany
 }
 
 type Project @model {

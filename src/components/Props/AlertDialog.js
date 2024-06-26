@@ -1,5 +1,7 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
+import { IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -25,9 +27,9 @@ export default function AlertDialog({callback}) {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen} style={{ fontSize: '0.8rem' }}>
-        Delete
-      </Button>
+      <IconButton onClick={handleClickOpen}>
+        <DeleteIcon/>
+      </IconButton>
       <Dialog
         open={open}
         onClose={handleClose}

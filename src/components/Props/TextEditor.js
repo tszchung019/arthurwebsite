@@ -82,19 +82,14 @@ class TextEditor extends Component {
     const { content } = this.state;
 
     return (
-      <div>
-        <div style={{ display: "grid"}}>
-          <ReactQuill
-            theme="snow"
-            modules={this.modules}
-            formats={this.formats}
-            placeholder="write your content ...."
-            onChange={this.handleProcedureContentChange}
-            style={{ height: `calc(100vh - 250px)` }}
-            value={content}
-          />
-        </div>
-      </div>
+      <ReactQuill
+        theme="snow"
+        modules={this.modules}
+        formats={this.formats}
+        placeholder="write your content ...."
+        onChange={this.handleProcedureContentChange}
+        value={content}
+      />
     );
   }
 }

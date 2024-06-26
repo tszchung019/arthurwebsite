@@ -99,7 +99,7 @@ export const createPost = /* GraphQL */ `
         name
         summary
         imgPath
-posts {
+        posts {
           nextToken
         }
         createdAt
@@ -107,7 +107,7 @@ posts {
         __typename
       }
       comments {
-items {
+      items {
           id
           content
           createdAt
@@ -138,7 +138,7 @@ export const updatePost = /* GraphQL */ `
         name
         summary
         imgPath
-posts {
+        posts {
           nextToken
         }
         createdAt
@@ -146,7 +146,7 @@ posts {
         __typename
       }
       comments {
-items {
+      items {
           id
           content
           createdAt
@@ -233,9 +233,18 @@ export const createComment = /* GraphQL */ `
         nextToken
         __typename
       }
+      user {
+        id
+        name
+        avatar
+        createdAt
+        updatedAt
+        __typename
+      }
       createdAt
       updatedAt
       postCommentsId
+      userCommentsId
       __typename
     }
   }
@@ -271,9 +280,18 @@ export const updateComment = /* GraphQL */ `
         nextToken
         __typename
       }
+      user {
+        id
+        name
+        avatar
+        createdAt
+        updatedAt
+        __typename
+      }
       createdAt
       updatedAt
       postCommentsId
+      userCommentsId
       __typename
     }
   }
@@ -309,9 +327,18 @@ export const deleteComment = /* GraphQL */ `
         nextToken
         __typename
       }
+      user {
+        id
+        name
+        avatar
+        createdAt
+        updatedAt
+        __typename
+      }
       createdAt
       updatedAt
       postCommentsId
+      userCommentsId
       __typename
     }
   }
@@ -329,12 +356,22 @@ export const createReply = /* GraphQL */ `
         createdAt
         updatedAt
         postCommentsId
+        userCommentsId
         __typename
       }
       content
+      user {
+        id
+        name
+        avatar
+        createdAt
+        updatedAt
+        __typename
+      }
       createdAt
       updatedAt
       commentReplysId
+      userReplysId
       __typename
     }
   }
@@ -352,12 +389,22 @@ export const updateReply = /* GraphQL */ `
         createdAt
         updatedAt
         postCommentsId
+        userCommentsId
         __typename
       }
       content
+      user {
+        id
+        name
+        avatar
+        createdAt
+        updatedAt
+        __typename
+      }
       createdAt
       updatedAt
       commentReplysId
+      userReplysId
       __typename
     }
   }
@@ -375,12 +422,22 @@ export const deleteReply = /* GraphQL */ `
         createdAt
         updatedAt
         postCommentsId
+        userCommentsId
         __typename
       }
       content
+      user {
+        id
+        name
+        avatar
+        createdAt
+        updatedAt
+        __typename
+      }
       createdAt
       updatedAt
       commentReplysId
+      userReplysId
       __typename
     }
   }
@@ -393,6 +450,7 @@ export const createUser = /* GraphQL */ `
     createUser(input: $input, condition: $condition) {
       id
       name
+      avatar
       projects {
         items {
           id
@@ -404,6 +462,14 @@ export const createUser = /* GraphQL */ `
           updatedAt
           userProjectsId
         }
+        nextToken
+        __typename
+      }
+      comments {
+        nextToken
+        __typename
+      }
+      replys {
         nextToken
         __typename
       }
@@ -421,6 +487,7 @@ export const updateUser = /* GraphQL */ `
     updateUser(input: $input, condition: $condition) {
       id
       name
+      avatar
       projects {
         items {
           id
@@ -432,6 +499,14 @@ export const updateUser = /* GraphQL */ `
           updatedAt
           userProjectsId
         }
+        nextToken
+        __typename
+      }
+      comments {
+        nextToken
+        __typename
+      }
+      replys {
         nextToken
         __typename
       }
@@ -449,6 +524,7 @@ export const deleteUser = /* GraphQL */ `
     deleteUser(input: $input, condition: $condition) {
       id
       name
+      avatar
       projects {
         items {
           id
@@ -460,6 +536,14 @@ export const deleteUser = /* GraphQL */ `
           updatedAt
           userProjectsId
         }
+        nextToken
+        __typename
+      }
+      comments {
+        nextToken
+        __typename
+      }
+      replys {
         nextToken
         __typename
       }
@@ -483,6 +567,7 @@ export const createProject = /* GraphQL */ `
       user {
         id
         name
+        avatar
         projects {
           nextToken
         }
@@ -511,6 +596,7 @@ export const updateProject = /* GraphQL */ `
       user {
         id
         name
+        avatar
         projects {
           nextToken
         }
@@ -539,6 +625,7 @@ export const deleteProject = /* GraphQL */ `
       user {
         id
         name
+        avatar
         projects {
           nextToken
         }
