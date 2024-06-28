@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../css/styles.css";
-import { API } from "aws-amplify";
+import { generateClient } from 'aws-amplify/api';
 import {
   Button,
   Flex,
@@ -54,6 +54,7 @@ export default function ManageBlogs() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [expandedRowId, setExpandedRowId] = useState(null);
+  const client = generateClient();
 
   useEffect(() => {
       fetchBlogs();
@@ -69,7 +70,7 @@ export default function ManageBlogs() {
   };
 
   async function fetchBlogs() {
-      const apiData = await API.graphql({ query: listBlogsQuery });
+      const apiData = await client.graphql({ query: listBlogsQuery });
       const blogsFromAPI = apiData.data.listBlogs.items;
       setBlogs(blogsFromAPI);
   }
@@ -80,7 +81,7 @@ export default function ManageBlogs() {
       const data = {
       name: form.get("name"),
       };
-      await API.graphql({
+      await client.graphql({
       query: createBlogMutation,
       variables: { input: data },
       });
@@ -91,7 +92,7 @@ export default function ManageBlogs() {
   async function deleteBlog({ id }) {
       const newBlogs = blogs.filter((blog) => blog.id !== id);
       setBlogs(newBlogs);
-      await API.graphql({
+      await client.graphql({
       query: deleteBlogMutation,
       variables: { input: { id } },
       });
@@ -108,7 +109,7 @@ export default function ManageBlogs() {
       }, []);
 
       async function getPostsfromBlog(id) {
-        const apiData = await API.graphql({
+        const apiData = await client.graphql({
           query: getBlogQuery,
           variables: { id: id },
         });
@@ -119,7 +120,7 @@ export default function ManageBlogs() {
       async function deletePost({ id }) {
           const newPosts = posts.filter((post) => post.id !== id);
           setPosts(newPosts);
-          await API.graphql({
+          await client.graphql({
           query: deletePostMutation,
           variables: { input: { id } },
           });
@@ -131,7 +132,7 @@ export default function ManageBlogs() {
           title: title,
           content: content,
           };
-          await API.graphql({
+          await client.graphql({
           query: createPostMutation,
           variables: { input: data },
           });

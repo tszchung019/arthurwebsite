@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import ListIcon from '@mui/icons-material/List';
-import { API } from "aws-amplify";
+import { generateClient } from 'aws-amplify/api';
 import {
     Heading,
     Text,
@@ -43,6 +43,7 @@ const Post = () => {
     const [commentContent, setCommentContent] = useState('');
     const [replyContent, setReplyContent] = useState('');
     const [activeReplyId, setActiveReplyId] = useState(null);
+    const client = generateClient();
 
     const toggleReply = (commentId) => {
         setActiveReplyId(activeReplyId === commentId ? null : commentId);
@@ -53,7 +54,7 @@ const Post = () => {
       }, []);
 
     async function getContentfromPost({ id }) {
-        const apiData = await API.graphql({
+        const apiData = await client.graphql({
           query: getPostQuery,
           variables: { id: id },
         });
@@ -79,7 +80,7 @@ const Post = () => {
         postCommentsId: id,
         content: content,
         };
-        await API.graphql({
+        await client.graphql({
         query: createCommentMutation,
         variables: { input: data },
         });
@@ -98,7 +99,7 @@ const Post = () => {
         commentReplysId: id,
         content: content,
         };
-        await API.graphql({
+        await client.graphql({
         query: createReplyMutation,
         variables: { input: data },
         });

@@ -15,7 +15,7 @@ export default function SignUp() {
   return (
     <div>
       <NavLink className={'homeIcon'} to={"/"}><HomeIcon /></NavLink>
-      <Authenticator>
+      <Authenticator socialProviders={['apple', 'facebook', 'google']}>
         {({ signOut, user }) => (
           <main>
             <Button variant="text" sx={{position: 'absolute', top: '5px', right: '10px'}} onClick={signOut}>Sign out</Button>

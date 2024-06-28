@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { API } from "aws-amplify";
+import { generateClient } from 'aws-amplify/api';
 import {
     Button,
     Flex,
@@ -63,6 +63,7 @@ const BlogPost = () => {
     const [posts, setPosts] = useState([]);
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const client = generateClient();
     const navigate = useNavigate()
 
     const handleChangePage = (event, newPage) => {
@@ -79,7 +80,7 @@ const BlogPost = () => {
       }, []);
 
     async function getPostsfromBlog({ id }) {
-        const apiData = await API.graphql({
+        const apiData = await client.graphql({
           query: getBlogQuery,
           variables: { id: id },
         });

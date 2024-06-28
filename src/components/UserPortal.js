@@ -43,7 +43,6 @@ function a11yProps(index) {
 
 export default function BasicTabs({user}) {
   const [value, setValue] = React.useState(0);
-  const [currentUser, setUser] = React.useState(user);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -60,12 +59,12 @@ export default function BasicTabs({user}) {
       </Box>
       <TabPanel value={value} index={0}>
         <NewProject 
-          user={currentUser}
+          user={user}
         />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <CurrentProjects
-          user={currentUser}
+          user={user}
         />
       </TabPanel>
       <TabPanel value={value} index={2}>

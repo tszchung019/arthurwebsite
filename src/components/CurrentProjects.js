@@ -9,7 +9,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { Button } from '@mui/material';
 
-import { API } from "aws-amplify";
+import { generateClient } from 'aws-amplify/api';
 import {
   getUser as getUserQuery,
   getProject as getProjectQuery,
@@ -53,6 +53,7 @@ export default function CurrentProjects({user}) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [projects, setProjects] = React.useState([]);
+  const client = generateClient();
 
   React.useEffect(() => {
     fetchUsers(user);
@@ -60,7 +61,7 @@ export default function CurrentProjects({user}) {
 
   async function fetchUsers(username) {
 
-    const apiData = await API.graphql({
+    const apiData = await client.graphql({
       query: listUsersQuery,
       variables: {filter: {name: {eq: username}}},
     });

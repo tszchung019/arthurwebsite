@@ -10,7 +10,7 @@ import {
     Link,
   } from "@aws-amplify/ui-react";
 
-import { API } from "aws-amplify";
+import { generateClient } from 'aws-amplify/api';
 import {
   getUser as getUserQuery,
   listUsers as listUsersQuery,
@@ -22,6 +22,7 @@ import {
 
 export default function NewProject({user}) {
   const [users, setUsers] = React.useState([]);
+  const client = generateClient();
 
   React.useEffect(() => {
     fetchUsers();
@@ -30,7 +31,7 @@ export default function NewProject({user}) {
   var currentUser = users.find((temp) => temp.name === user);
 
   async function fetchUsers() {
-    const apiData = await API.graphql({ query: listUsersQuery });
+    const apiData = await client.graphql({ query: listUsersQuery });
     const usersFromAPI = apiData.data.listUsers.items;
     setUsers(usersFromAPI);
   }
@@ -39,7 +40,7 @@ export default function NewProject({user}) {
     const data = {
       name: user,
     };
-    await API.graphql({
+    await client.graphql({
       query: createUserMutation,
       variables: { input: data },
     });
@@ -50,7 +51,7 @@ export default function NewProject({user}) {
     currentUser = users.find((temp) => temp.name === user);
     if(!users.includes(currentUser)) {
       await createUser(user);
-      const apiData = await API.graphql({ query: listUsersQuery });
+      const apiData = await client.graphql({ query: listUsersQuery });
       var usersFromAPI = apiData.data.listUsers.items;
       setUsers(usersFromAPI);
       currentUser = usersFromAPI.find((temp) => temp.name === user);
@@ -63,7 +64,7 @@ export default function NewProject({user}) {
       status: true,
       userProjectsId: currentUser.id,
     };
-    await API.graphql({
+    await client.graphql({
     query: createProjectMutation,
     variables: { input: data },
     });

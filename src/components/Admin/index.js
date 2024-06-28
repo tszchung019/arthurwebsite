@@ -1,40 +1,65 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Component } from "react";
 import ManageBlogs from "./ManageBlogs";
-import { Authenticator, Heading, Text } from '@aws-amplify/ui-react';
+import { withAuthenticator, Text } from '@aws-amplify/ui-react';
+import { fetchAuthSession } from 'aws-amplify/auth';
+import { getCurrentUser } from 'aws-amplify/auth';
 import BasicTabs from '../UserPortal.js';
 import { Button } from '@mui/material';
-export default function Admin() {
-    return (
-        <div>
-            <Authenticator>
-                {({ signOut, user }) => (
+class Admin extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            group:'',
+            username:''
+        };
+    }
+    async componentDidMount() {
+        const { tokens } = await fetchAuthSession();
+        const { username } = await getCurrentUser();
+        const groupname = tokens.accessToken.payload["cognito:groups"][0]
+        this.setState({ group:groupname, username: username });
+    }
+    render() {
+        const { group, username }= this.state
+        if (/^Admin$/i.test(group))
+            return (
                 <main>
-                    <Button variant="text" sx={{position: 'absolute', top: '5px', right: '10px'}} onClick={signOut}>Sign out</Button>
                     <div className="container">
-                        {user.getSignInUserSession().getAccessToken().payload['cognito:groups']=='Admin'? (
-                            <div>
+                        <div>
                             <section>
-                                <Text>Welcome, administrator {user.username}!</Text>
+                                <Text>Welcome, administrator {username}!</Text>
                             </section>
                             <ManageBlogs />
-                            </div>
-                        ) : (
-                            <section>
-                            <h1>Hello {user.username}</h1>
-                            <p>This is your portal for managing your projects with me. You can start a new project, ask for a quote, and manage the work schedule with existing projects</p>
-                            </section>
-                        )}
+                        </div>
                         <div className="project-section">
                             <section id='userPortal'>
                             <BasicTabs
-                                user={user.username}
+                                user={username}
                             />
                             </section>
                         </div>
                     </div>
                 </main>
-                )}
-            </Authenticator>
-        </div>
-    );
+            )
+        else
+            return (
+                <main>
+                    <div className="container">
+                        <section>
+                            <h1>Hello {username}</h1>
+                            <p>This is your portal for managing your projects with me. You can start a new project, ask for a quote, and manage the work schedule with existing projects</p>
+                        </section>
+                        <div className="project-section">
+                            <section id='userPortal'>
+                            <BasicTabs
+                                user={username}
+                            />
+                            </section>
+                        </div>
+                    </div>
+                </main>
+            )
+    }
 }
+
+export default withAuthenticator(Admin, { hideSignUp: true });

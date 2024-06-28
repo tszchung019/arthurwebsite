@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../css/styles.css";
-import { API } from "aws-amplify";
+import { generateClient } from 'aws-amplify/api';
 import {
   Button,
   Flex,

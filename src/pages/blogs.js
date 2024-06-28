@@ -10,7 +10,7 @@ import {
   Grid,
   styled,
 } from "@mui/material";
-import { API } from "aws-amplify";
+import { generateClient } from 'aws-amplify/api';
 import {
   Flex,
   Heading,
@@ -47,6 +47,7 @@ const Blogs = () => {
 
   const theme = useTheme();
 	const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const client = generateClient();
   const navigate = useNavigate();
 
   // TODO: Avoid require links to AWS service on client side
@@ -61,7 +62,7 @@ const Blogs = () => {
   }, []);
 
   async function fetchBlogs() {
-    const apiData = await API.graphql({ query: listBlogsQuery });
+    const apiData = await client.graphql({ query: listBlogsQuery });
     const blogsFromAPI = apiData.data.listBlogs.items;
     setBlogs(blogsFromAPI);
   }
@@ -72,7 +73,7 @@ const Blogs = () => {
     const data = {
       name: form.get("name"),
     };
-    await API.graphql({
+    await client.graphql({
       query: createBlogMutation,
       variables: { input: data },
     });
@@ -83,7 +84,7 @@ const Blogs = () => {
   async function deleteBlog({ id }) {
     const newBlogs = blogs.filter((blog) => blog.id !== id);
     setBlogs(newBlogs);
-    await API.graphql({
+    await client.graphql({
       query: deleteBlogMutation,
       variables: { input: { id } },
     });
